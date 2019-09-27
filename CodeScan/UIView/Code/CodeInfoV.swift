@@ -1,10 +1,7 @@
 //
 //  CodeInfoV.swift
 //  CodeScan
-//
-//  Created by Stephen Muscarella on 5/30/18.
-//  Copyright © 2018 Elite Development LLC. All rights reserved.
-//
+
 
 import UIKit
 

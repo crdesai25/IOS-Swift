@@ -1,10 +1,6 @@
 //
 //  CustomAFNetWorking.m
-//  MajesticCarRental
-//
-//  Created by Gaurav Parmar on 23/02/16.
-//  Copyright © 2016 Quantum Technolabs. All rights reserved.
-//
+
 
 #import "CustomAFNetWorking.h"
 #import "AFNetworking.h"

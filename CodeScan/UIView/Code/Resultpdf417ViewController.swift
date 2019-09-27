@@ -1,10 +1,7 @@
 //
 //  Resultpdf417ViewController.swift
 //  AccuraSDK
-//
-//  Created by Prit on 29/08/18.
-//  Copyright © 2018 Elite Development LLC. All rights reserved.
-//
+
 
 import UIKit
 

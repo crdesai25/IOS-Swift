@@ -1,16 +1,9 @@
-/*
- Erica Sadun, http://ericasadun.com
- iPhone Developer's Cookbook, 3.0 Edition
- BSD License, Use at your own risk
- */
+
 
 #import "ImageHelper.h"
 #import <QuartzCore/QuartzCore.h>
 
 #if SUPPPORTS_UNDOCUMENTED_APIS
-//@interface UIImage (privateAPISForOrientation)
-//- (id)initWithCGImage:(struct CGImage *)fp8 imageOrientation:(int)fp12;
-//@end
 #endif
 
 #pragma mark Bitmap Offsets
@@ -177,11 +170,7 @@ void addRoundedRectToContext(CGContextRef context, CGRect rect, CGSize ovalSize)
     CGRect rect = CGRectMake(0.0f, 0.0f, image.size.width, image.size.height);
     CGContextDrawImage(context, rect, image.CGImage);
 	unsigned char *data = CGBitmapContextGetData (context);
-    
-    if (data == NULL)
-    {
-        //NSLog(@"width = %d, height = %d", image.size.width, image.size.height);
-    }
+   
 	CGContextRelease(context);
 	return data;
 }
@@ -352,9 +341,7 @@ void addRoundedRectToContext(CGContextRef context, CGRect rect, CGSize ovalSize)
 	CGSize viewsize = croprect.size;
 	
 	UIGraphicsBeginImageContext(viewsize);
-//	float dwidth = (viewsize.width - size.width) / 2.0f;
-//	float dheight = (viewsize.height - size.height) / 2.0f;
-	
+
 	CGRect rect = CGRectMake(-croprect.origin.x, -croprect.origin.y, size.width, size.height);
 	[image drawInRect:rect];
 	
@@ -478,14 +465,6 @@ void addRoundedRectToContext(CGContextRef context, CGRect rect, CGSize ovalSize)
     UIGraphicsEndImageContext();  
     return newimg;  
 }
-
-//#if SUPPPORTS_UNDOCUMENTED_APIS
-//+ (UIImage *) image: (UIImage *) image withOrientation: (UIImageOrientation) orientation
-//{
-//    UIImage *newimg = [[UIImage alloc] initWithCGImage:[image CGImage] imageOrientation:orientation];
-//    return newimg;
-//}
-//#endif
 
 @end
 

@@ -50,7 +50,6 @@
 		5C67D9A02111E46400154EB7 /* mMQDF_f_Passport_bottom_Gray.dic in Resources */ = {isa = PBXBuildFile; fileRef = 5C67D99E2111E46400154EB7 /* mMQDF_f_Passport_bottom_Gray.dic */; };
 		5C67D9A72111E48C00154EB7 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5C67D9A42111E48B00154EB7 /* SVProgressHUD.bundle */; };
 		5C67D9A82111E48C00154EB7 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C67D9A62111E48B00154EB7 /* SVProgressHUD.m */; };
-		5C67D9B22111E4D200154EB7 /* WebAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C67D9B02111E4D200154EB7 /* WebAPIRequest.m */; };
 		5C67D9C52111E78500154EB7 /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C67D9C42111E78500154EB7 /* PlaceViewController.swift */; };
 		5C7D02532143CDFE00F05ADE /* DrivingPDFstringTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D02512143CDFE00F05ADE /* DrivingPDFstringTableViewCell.swift */; };
 		5C7D02542143CDFE00F05ADE /* DrivingPDFstringTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C7D02522143CDFE00F05ADE /* DrivingPDFstringTableViewCell.xib */; };
@@ -94,7 +93,6 @@
 		617EB0E320BB78B300BCBFD9 /* MainV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617EB0E220BB78B300BCBFD9 /* MainV.swift */; };
 		617EB0E520BB78D100BCBFD9 /* ScanRegionV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617EB0E420BB78D100BCBFD9 /* ScanRegionV.swift */; };
 		617EB0E720BB78F500BCBFD9 /* ScanRegionV.xib in Resources */ = {isa = PBXBuildFile; fileRef = 617EB0E620BB78F500BCBFD9 /* ScanRegionV.xib */; };
-		617EB0E920BB7CEF00BCBFD9 /* SineWaveV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617EB0E820BB7CEF00BCBFD9 /* SineWaveV.swift */; };
 		617EB0EB20BB8F2B00BCBFD9 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617EB0EA20BB8F2B00BCBFD9 /* UIViewExtensions.swift */; };
 		8432A2872135132A006BA16A /* DrivingPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8432A2862135132A006BA16A /* DrivingPDF.swift */; };
 		8432A28B213513AB006BA16A /* drivingpdfTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8432A289213513AB006BA16A /* drivingpdfTableViewCell.xib */; };
@@ -197,8 +195,6 @@
 		5C67D9A42111E48B00154EB7 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		5C67D9A52111E48B00154EB7 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		5C67D9A62111E48B00154EB7 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
-		5C67D9AF2111E4D200154EB7 /* WebAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebAPIRequest.h; sourceTree = "<group>"; };
-		5C67D9B02111E4D200154EB7 /* WebAPIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebAPIRequest.m; sourceTree = "<group>"; };
 		5C67D9B12111E4D200154EB7 /* WebServiceUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceUrl.h; sourceTree = "<group>"; };
 		5C67D9C42111E78500154EB7 /* PlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceViewController.swift; sourceTree = "<group>"; };
 		5C7D02512143CDFE00F05ADE /* DrivingPDFstringTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingPDFstringTableViewCell.swift; sourceTree = "<group>"; };
@@ -247,7 +243,6 @@
 		617EB0E220BB78B300BCBFD9 /* MainV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainV.swift; sourceTree = "<group>"; };
 		617EB0E420BB78D100BCBFD9 /* ScanRegionV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanRegionV.swift; sourceTree = "<group>"; };
 		617EB0E620BB78F500BCBFD9 /* ScanRegionV.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScanRegionV.xib; sourceTree = "<group>"; };
-		617EB0E820BB7CEF00BCBFD9 /* SineWaveV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineWaveV.swift; sourceTree = "<group>"; };
 		617EB0EA20BB8F2B00BCBFD9 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		8432A2862135132A006BA16A /* DrivingPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingPDF.swift; sourceTree = "<group>"; };
 		8432A289213513AB006BA16A /* drivingpdfTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = drivingpdfTableViewCell.xib; sourceTree = "<group>"; };
@@ -472,8 +467,6 @@
 			isa = PBXGroup;
 			children = (
 				A33ED5CA230EBFE100005B85 /* PostResult.swift */,
-				5C67D9AF2111E4D200154EB7 /* WebAPIRequest.h */,
-				5C67D9B02111E4D200154EB7 /* WebAPIRequest.m */,
 				5C67D9B12111E4D200154EB7 /* WebServiceUrl.h */,
 			);
 			path = "WebRequestViewController ";
@@ -627,7 +620,6 @@
 				617EB0DB20BB6A4F00BCBFD9 /* BarcodeTypeHFV.swift */,
 				617EB0E220BB78B300BCBFD9 /* MainV.swift */,
 				617EB0E420BB78D100BCBFD9 /* ScanRegionV.swift */,
-				617EB0E820BB7CEF00BCBFD9 /* SineWaveV.swift */,
 				5C7D02512143CDFE00F05ADE /* DrivingPDFstringTableViewCell.swift */,
 				DC75E60120BF36FB0096BC5A /* CodeInfoV.swift */,
 				8432A2862135132A006BA16A /* DrivingPDF.swift */,
@@ -881,14 +873,12 @@
 				617EB0EB20BB8F2B00BCBFD9 /* UIViewExtensions.swift in Sources */,
 				A341D734230EA28600FDF946 /* ImageVC.swift in Sources */,
 				A341D732230EA28600FDF946 /* PlacePanCardVC.swift in Sources */,
-				5C67D9B22111E4D200154EB7 /* WebAPIRequest.m in Sources */,
 				00238B5722AD67F80031BADB /* UserImgTableCell.swift in Sources */,
 				617EB0E320BB78B300BCBFD9 /* MainV.swift in Sources */,
 				617EB0E520BB78D100BCBFD9 /* ScanRegionV.swift in Sources */,
 				5C67D9A82111E48C00154EB7 /* SVProgressHUD.m in Sources */,
 				1827A1A9230D0CB00026E8A8 /* FaceImageView.m in Sources */,
 				617EB0DC20BB6A4F00BCBFD9 /* BarcodeTypeHFV.swift in Sources */,
-				617EB0E920BB7CEF00BCBFD9 /* SineWaveV.swift in Sources */,
 				617EB0E120BB705D00BCBFD9 /* NSObjectExtensions.swift in Sources */,
 				0021908C22ACE4B200E08B01 /* PlaceAdharCardVC.swift in Sources */,
 				0021909222ACE79D00E08B01 /* ListTableCell.swift in Sources */,

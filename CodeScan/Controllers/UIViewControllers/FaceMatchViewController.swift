@@ -1,10 +1,7 @@
 //
 //  FaceMatchViewController.swift
 //  AccuraSDK
-//
-//  Created by Technozer on 8/20/19.
-//  Copyright © 2019 Elite Development LLC. All rights reserved.
-//
+
 
 import UIKit
 import SVProgressHUD
@@ -57,7 +54,6 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
     
     
     override func viewDidDisappear(_ animated: Bool) {
-        // EngineWrapper.faceEngineClose()
     }
     
     //MARK:- UIButton Action
@@ -90,6 +86,13 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
     }
     
     //MARK:- Custom Methods
+   
+    /**
+     * This method use to check permission photoLibrary and camera
+     * Parameters to Pass: bool value first time page open
+     *
+     */
+    
     func openPhotosLibrary(_isFirst: Bool){
         //Check camera permission
         let photos = PHPhotoLibrary.authorizationStatus()
@@ -109,6 +112,11 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         }
     }
     
+    /**
+     * This method use to opem camera
+     * Parameters to Pass: bool value first time page open
+     *
+     */
     func openGallary(_ isFirst: Bool){
         selectFirstImage = isFirst
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -128,6 +136,12 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         }
     }
     
+    /**
+     * This method use get captured view
+     * Parameters to Pass: UIView
+     *
+     * This method will return array of UIImageview
+     */
     func allImageViewsSubViews(_ view: UIView?) -> [AnyHashable]? {
         var arrImageViews: [AnyHashable] = []
         if (view is UIImageView) {
@@ -177,6 +191,11 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         
     }
     
+    /**
+     * This method use calculate faceMatch score
+     * Parameters to Pass: selected uiimage
+     *
+     */
     func setFaceRegion(_ image: UIImage) {
         var faceRegion : NSFaceRegion?
         if(selectFirstImage){
@@ -199,7 +218,6 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
                 faceView1.isHidden = false
                 imgUpload.isHidden = true
                 txtUpload.isHidden = true
-                
             }
             
             let face2 : NSFaceRegion? = faceView2.getFaceRegion();
@@ -278,7 +296,12 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         }
     }
     
-    //Comapress Image
+    /**
+     * This method use image compress particular size
+     * Parameters to Pass: UIImage and covert size
+     *
+     * This method will return compress UIImage
+     */
     func compressimage(with image: UIImage?, convertTo size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         image?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
@@ -287,43 +310,6 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         return destImage
     }
     
-}
-
-
-extension UIImage {
-    func resizeWithPercent(percentage: CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: size.width * percentage, height: size.height * percentage)))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = self
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.render(in: context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return result
-    }
-    func resizeWithWidth(width: CGFloat, height:CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: height)))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = self
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.render(in: context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return result
-    }
-    func resizeWithWidth(width: CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = self
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.render(in: context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return result
-    }
 }
 
 // Helper function inserted by Swift 4.2 migrator.

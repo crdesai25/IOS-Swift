@@ -1,10 +1,6 @@
 //
 //  CustomAFNetWorking.h
-//  MajesticCarRental
-//
-//  Created by Gaurav Parmar on 23/02/16.
-//  Copyright © 2016 Quantum Technolabs. All rights reserved.
-//
+
 
 #import <Foundation/Foundation.h>
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -25,13 +21,6 @@
 -(id)initWithGet:(NSString *)request withTag:(int)cTag withParameter:(NSMutableDictionary *)parameter;
 -(id)initWithPost:(NSString *)requeststr withTag:(int)cTag withParameter:(NSMutableDictionary *)parameter ImageName: (UIImage *)image andImageKey: (NSString *)key;
 -(id)initWithDeleteToken:(NSString *)request withTag:(int)cTag withParameter:(NSMutableDictionary *)parameter;
-//-(id)initWithPost:(NSString *)requeststr withTag:(int)cTag withParameter:(NSMutableDictionary *)parameter ImageName :(UIImage *)image andImageKey: (NSString *)key CellImageName :(UIImage *)cellImage andCellImageKey: (NSString *)cellKey;
-
-//-(id)initWithPostLogin:(NSString *)request withTag:(int)cTag withParameter:(NSMutableDictionary *)parameter;
-//-(id)initWithPostToken:(NSString *)request withTag:(int)cTag withParameter:(NSMutableDictionary *)parameter;
-//-(id)initWithPutToken:(NSString *)request withTag:(int)cTag withParameter:(NSMutableDictionary *)parameter;
-//-(id)initWithGetToken:(NSString *)request withTag:(int)cTag withParameter:(NSMutableDictionary *)parameter;
-//-(id)initWithDeleteToken:(NSString *)request withTag:(int)cTag withParameter:(NSMutableDictionary *)parameter;
 @end
 
 @protocol CustomAFNetWorkingDelegate<NSObject>

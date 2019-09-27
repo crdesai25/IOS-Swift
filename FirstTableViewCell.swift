@@ -1,10 +1,7 @@
 //
 //  FirstTableViewCell.swift
 //  AccuraSDK
-//
-//  Created by kuldeep on 8/19/19.
-//  Copyright © 2019 Elite Development LLC. All rights reserved.
-//
+
 
 import UIKit
 

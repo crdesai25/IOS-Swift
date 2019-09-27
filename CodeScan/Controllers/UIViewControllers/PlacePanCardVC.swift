@@ -1,15 +1,10 @@
 //
 //  PlacePanCardVC.swift
 //  AccuraSDK
-//
-//  Created by Zignuts Technolab on 07/06/19.
-//  Copyright © 2019 Elite Development LLC. All rights reserved.
-//
+
 
 import UIKit
 import AVFoundation
-
-
 
 class PlacePanCardVC: UIViewController {
 

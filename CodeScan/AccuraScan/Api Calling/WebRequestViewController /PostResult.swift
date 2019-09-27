@@ -1,10 +1,6 @@
 //
 //  PostResult.swift
-//  Accura Scan
-//
-//  Created by Mudassir Abbas on 04/08/2019.
-//  Copyright © 2019 Elite Development LLC. All rights reserved.
-//
+
 
 import UIKit
 import Alamofire
@@ -80,74 +76,6 @@ typealias ProgressBlock = (_ response: AnyObject) -> Void
     
 }
 
-//extension UIImage {
-//    
-//    enum JPEGQuality: CGFloat {
-//        case lowest  = 0
-//        case low     = 0.25
-//        case medium  = 0.5
-//        case high    = 0.75
-//        case highest = 1
-//    }
-//    
-//    var png: Data? { return UIImagePNGRepresentation(self) }
-//    
-//    func jpeg(_ quality: JPEGQuality) -> Data? {
-//        return UIImageJPEGRepresentation(self, quality.rawValue)
-//    }
-//    
-//    
-//    
-//    func imageWithColor(color1: UIColor) -> UIImage {
-//        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
-//        color1.setFill()
-//        
-//        let context = UIGraphicsGetCurrentContext()!
-//        context.translateBy(x: 0, y: self.size.height)
-//        context.scaleBy(x: 1.0, y: -1.0);
-//        context.setBlendMode(CGBlendMode.normal)
-//        
-//        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
-//        context.clip(to: rect, mask: self.cgImage!)
-//        context.fill(rect)
-//        
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
-//        UIGraphicsEndImageContext()
-//        
-//        return newImage
-//    }
-//    
-//    
-//    
-//    
-//    
-//    var rounded: UIImage? {
-//        let imageView = UIImageView(image: self)
-//        imageView.layer.cornerRadius = min(size.height/2, size.width/2)
-//        imageView.layer.masksToBounds = true
-//        UIGraphicsBeginImageContext(imageView.bounds.size)
-//        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-//        imageView.layer.render(in: context)
-//        let result = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        return result
-//    }
-//    var circle: UIImage? {
-//        let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
-//        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
-//        imageView.contentMode = .scaleToFill
-//        imageView.image = self
-//        imageView.layer.cornerRadius = square.width/2
-//        imageView.layer.masksToBounds = true
-//        UIGraphicsBeginImageContext(imageView.bounds.size)
-//        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-//        imageView.layer.render(in: context)
-//        let result = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        return result
-//    }
-//    
-//}
 extension UIImage {
     enum JPEGQuality: CGFloat {
         case lowest  = 0

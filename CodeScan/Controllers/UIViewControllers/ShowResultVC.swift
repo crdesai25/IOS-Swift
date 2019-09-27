@@ -1,10 +1,7 @@
 //
 //  ShowResultVC.swift
 //  AccuraSDK
-//
-//  Created by Zignuts Technolab on 07/06/19.
-//  Copyright © 2019 Elite Development LLC. All rights reserved.
-//
+
 
 import UIKit
 import ZoomAuthenticationHybrid
@@ -345,6 +342,10 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     //MARK:- Custom Methods
+    /**
+     * This method use set scanning data
+     *
+     */
     func setData(){
         //Set tableView Data
         if pageType == .ScanPan{
@@ -427,9 +428,6 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
         }
         else{
-            //        let firstLetter = lines.subString(from: 0, to: 1)//(lines as? NSString)?.substring(to: 1)
-            //        if !((firstLetter == "d") || (firstLetter == "D")) {
-            //            if passportType.contains("V") || passportType.contains("v") || passportType.contains("P") || passportType.contains("p") {
             for index in 0..<18 + appDocumentImage.count{
                 var dict: [String:AnyObject] = [String:AnyObject]()
                 switch index {
@@ -462,8 +460,6 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                         dType = "DRIVING LICENCE"
                     }
                     else {
-                        //                            var firstLetter = (lines as? NSString)?.substring(to: 1)
-                        //                            firstLetter = firstLetter?.lowercased()
                         if (strFstLetter == "d") {
                             dType = "DRIVING LICENCE"
                         } else {
@@ -563,31 +559,16 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                     break
                 }
             }
-            //            }else if (country == "ESP") {
-            //
-            //            }else{
-            //                for index in 0..<19{
-            //                    var dict: [String:AnyObject] = [String:AnyObject]()
-            //                    switch index {
-            //                    case 0:
-            //                        dict = [KEY_FACE_IMAGE: photoImage] as [String : AnyObject]
-            //                        arrDocumentData.append(dict)
-            //                        break
-            //                    case 1:
-            //                        break
-            //
-            //                    default:
-            //                        break
-            //                    }
-            //
-            //                }
-            //            }
-            //       }
         }
-//        print(arrDocumentData.count)
      self.sendMail()
     }
     
+    /**
+     * This method use lunchZoom setup
+     * Make sure initialization was successful before launcing ZoOm
+     *
+     */
+ 
     func launchZoomToVerifyLivenessAndRetrieveFacemap() {
      // Make sure initialization was successful before launcing ZoOm
         var reason: String = ""
@@ -673,7 +654,10 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.present(alert, animated: true, completion: nil)
     }
     
-    //Set Custome Frame Zoom
+    /**
+     * This method use set custom Frame lunchZoom
+     *
+     */
     func centerZoomFrameCustomization(_ currentCustomization:ZoomCustomization){
         let screenHeight = UIScreen.main.fixedCoordinateSpace.bounds.size.height
         var frameHeight = CGFloat(screenHeight) * CGFloat(currentCustomization.frameCustomization.sizeRatio)
@@ -713,56 +697,56 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     //MARK:- Api Calling
     func sendMail(){
         DispatchQueue.global(qos: .background).async {
-        var subjectTitle: String = ""
-        var mailBody: String = ""
-        var givenNames: String = ""
-        var surName: String = ""
-        var fmScr : String = ""
-        var liveScr : String = ""
-        var cardType : String = ""
-        var faceImage: UIImage?
-        var arrDocument: [UIImage] = [UIImage]()
-        let br = "<br/>";
-        //=============================== Mail Body =============================== //
+            var subjectTitle: String = ""
+            var mailBody: String = ""
+            var givenNames: String = ""
+            var surName: String = ""
+            var fmScr : String = ""
+            var liveScr : String = ""
+            var cardType : String = ""
+            var faceImage: UIImage?
+            var arrDocument: [UIImage] = [UIImage]()
+            let br = "<br/>";
+            //=============================== Mail Body =============================== //
             for dictFinalData in self.arrDocumentData{
-            if dictFinalData[KEY_TITLE] != nil{
-                if dictFinalData[KEY_TITLE] as! String == "LAST NAME : "{
-                    surName = dictFinalData[KEY_VALUE] as! String
+                if dictFinalData[KEY_TITLE] != nil{
+                    if dictFinalData[KEY_TITLE] as! String == "LAST NAME : "{
+                        surName = dictFinalData[KEY_VALUE] as! String
+                    }
+                    if dictFinalData[KEY_TITLE] as! String == "FIRST NAME : "{
+                        givenNames = dictFinalData[KEY_VALUE] as! String
+                    }
                 }
-                if dictFinalData[KEY_TITLE] as! String == "FIRST NAME : "{
-                    givenNames = dictFinalData[KEY_VALUE] as! String
+                
+                if dictFinalData[KEY_FACE_IMAGE2] != nil {
+                    faceImage = dictFinalData[KEY_FACE_IMAGE2] as? UIImage
+                }
+                
+                if dictFinalData[KEY_DOC1_IMAGE] != nil{
+                    arrDocument.append(dictFinalData[KEY_DOC1_IMAGE] as! UIImage)
+                }
+                
+                if dictFinalData[KEY_DOC2_IMAGE] != nil{
+                    arrDocument.append(dictFinalData[KEY_DOC2_IMAGE] as! UIImage)
                 }
             }
             
-            if dictFinalData[KEY_FACE_IMAGE2] != nil {
-                faceImage = dictFinalData[KEY_FACE_IMAGE2] as? UIImage
-            }
             
-            if dictFinalData[KEY_DOC1_IMAGE] != nil{
-                arrDocument.append(dictFinalData[KEY_DOC1_IMAGE] as! UIImage)
-            }
-            
-            if dictFinalData[KEY_DOC2_IMAGE] != nil{
-                arrDocument.append(dictFinalData[KEY_DOC2_IMAGE] as! UIImage)
-            }
-        }
-        
-      
             if self.obj_AppDelegate.selectedScanType == .AccuraScan{
                 fmScr = self.getValue(stKey: "FACEMATCH SCORE : ")
-            if !fmScr.isEmpty{
-                mailBody += "FaceMatch Score: \(fmScr) \(br)"
-            }
-            
+                if !fmScr.isEmpty{
+                    mailBody += "FaceMatch Score: \(fmScr) \(br)"
+                }
+                
                 liveScr = self.getValue(stKey: "LIVENESS SCORE : ")
-            if !liveScr.isEmpty{
-                mailBody += "Liveness Score: \(liveScr) \(br)"
+                if !liveScr.isEmpty{
+                    mailBody += "Liveness Score: \(liveScr) \(br)"
+                }
+                
             }
             
-        }
-        
             if self.pageType == .ScanAadhar{ //Aadhar Card
-            subjectTitle  = "iOS Test - Aadhar + \(givenNames) \(surName)" //Mail Title
+                subjectTitle  = "iOS Test - Aadhar + \(givenNames) \(surName)" //Mail Title
                 mailBody += "Document: \(self.getValue(stKey: "DOCUMENT : ")) \(br)"
                 mailBody += "Last Name: \(self.getValue(stKey: "LAST NAME : ")) \(br)"
                 mailBody += "First Name: \(self.getValue(stKey: "FIRST NAME : ")) \(br)"
@@ -771,18 +755,18 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 mailBody += "Sex: \(self.getValue(stKey: "SEX : ")) \(br)"
                 mailBody += "Date of Birth: \(self.getValue(stKey: "DATE OF BIRTH : ")) \(br)"
                 mailBody += "Address: \(self.getValue(stKey: "ADDRESS : ")) \(br)"
-        }
+            }
             else if self.pageType == .ScanPan{ //Pan Card
-            subjectTitle  = "iOS Test - PAN + \(givenNames) \(surName)" //Mail Title
+                subjectTitle  = "iOS Test - PAN + \(givenNames) \(surName)" //Mail Title
                 mailBody += "Document: \(self.getValue(stKey: "DOCUMENT : ")) \(br)"
                 mailBody += "Last Name: \(self.getValue(stKey: "LAST NAME : ")) \(br)"
                 mailBody += "First Name: \(self.getValue(stKey: "FIRST NAME : ")) \(br)"
                 mailBody += "Pan Card No: \(self.getValue(stKey: "PAN CARD NO : ")) \(br)"
                 mailBody += "Country: \(self.getValue(stKey: "COUNTRY : ")) \(br)"
                 mailBody += "Date of Birth: \(self.getValue(stKey: "DATE OF BIRTH : ")) \(br)"
-        }else{ //Passport
-            subjectTitle  = "iOS Test - MRZ + \(givenNames) \(surName)" //Mail Title
-            
+            }else{ //Passport
+                subjectTitle  = "iOS Test - MRZ + \(givenNames) \(surName)" //Mail Title
+                
                 mailBody += "Document: \(self.getValue(stKey: "DOCUMENT TYPE : ")) \(br)"
                 mailBody += "Last Name: \(self.getValue(stKey: "LAST NAME : ")) \(br)"
                 mailBody += "First Name: \(self.getValue(stKey: "FIRST NAME : ")) \(br)"
@@ -799,49 +783,54 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 mailBody += "Other ID Check: \(self.getValue(stKey: "OTHER ID CHECK : ")) \(br)"
                 mailBody += "Second Row Check Number: \(self.getValue(stKey: "SECOND ROW CHECK NUMBER : ")) \(br)"
                 mailBody += "Result: \(self.getValue(stKey: "RESULT : ")) \(br)"
-        }
-        
-        
+            }
+            
+            
             if self.obj_AppDelegate.selectedScanType == .AccuraScan{
                 if !self.stLivenessResult.isEmpty{
                     mailBody += "Liveness Result : \(self.stLivenessResult) \(br)"
+                }
             }
-        }
-        
+            
             if self.pageType == .ScanAadhar{
-            cardType = "Adharcard"
+                cardType = "Adharcard"
             }else if self.pageType == .ScanPan{
-            cardType = "Pancard"
-        }else{
-            cardType = "MRZ"
-        }
-        //=============================== Mail Body =============================== //
-        
-        var dictParam: [String: String] = [String: String]()
-        dictParam["mailSubject"] = subjectTitle
-        dictParam["platform"] = "iOS"
-        dictParam["type"] = cardType
-        dictParam["facematch"] = fmScr == "" ? "False" : "True"
-        dictParam["liveness"] = liveScr == "" ? "False" : "True"
-        dictParam["mailBody"] = mailBody
-    
-        let sharedInstance = NetworkReachabilityManager()!
-        var isConnectedToInternet:Bool {
-            return sharedInstance.isReachable
-        }
-        if(isConnectedToInternet){
-            let post = PostResult()
-            post.postMethodWithParamsAndImage(parameters: dictParam, forMethod: "https://accurascan.com/sendEmailApi/sendEmail.php", image: arrDocument, faceImg: faceImage == nil ? nil : faceImage , success: { (response) in
-                print(response)
-            }) { (error) in
-                print(error)
+                cardType = "Pancard"
+            }else{
+                cardType = "MRZ"
             }
-        }
+            //=============================== Mail Body =============================== //
+            
+            var dictParam: [String: String] = [String: String]()
+            dictParam["mailSubject"] = subjectTitle
+            dictParam["platform"] = "iOS"
+            dictParam["type"] = cardType
+            dictParam["facematch"] = fmScr == "" ? "False" : "True"
+            dictParam["liveness"] = liveScr == "" ? "False" : "True"
+            dictParam["mailBody"] = mailBody
+            
+            let sharedInstance = NetworkReachabilityManager()!
+            var isConnectedToInternet:Bool {
+                return sharedInstance.isReachable
+            }
+            if(isConnectedToInternet){
+                let post = PostResult()
+                post.postMethodWithParamsAndImage(parameters: dictParam, forMethod: "https://accurascan.com/sendEmailApi/sendEmail.php", image: arrDocument, faceImg: faceImage == nil ? nil : faceImage , success: { (response) in
+                    print(response)
+                }) { (error) in
+                    print(error)
+                }
+            }
         }
         
     }
     
-    //Find Value for array
+    /**
+     * This method use find array in filter particular value
+     * Parameters to Pass: filter key
+     *
+     * This method will return filter key value
+     */
     func getValue(stKey: String) -> String {
         let arrResult = arrDocumentData.filter( { (details: [String:AnyObject]) -> Bool in
             return ("\(details[KEY_TITLE] ?? "" as AnyObject)" == stKey )
@@ -865,7 +854,13 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             picker.dismiss(animated: true)
         }
     }
-    //Get Image for Imagepickerview
+    
+    /**
+     * This method use get captured view
+     * Parameters to Pass: UIView
+     *
+     * This method will return array of UIImageview
+     */
     func allImageViewsSubViews(_ view: UIView?) -> [AnyHashable]? {
         var arrImageViews: [AnyHashable] = []
         if (view is UIImageView) {
@@ -882,7 +877,12 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         return arrImageViews
     }
     
-    //Comapress Image
+    /**
+     * This method use image compress particular size
+     * Parameters to Pass: UIImage and covert size
+     *
+     * This method will return compress UIImage
+     */
     func compressimage(with image: UIImage?, convertTo size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         image?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
@@ -921,18 +921,6 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     //MARK: - UITableView Delegate and Datasource Method
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let firstLetter = lines.subString(from: 0, to: 1)//(lines as? NSString)?.substring(to: 1)
-//        if !((firstLetter == "d") || (firstLetter == "D")) {
-//            if passportType.contains("V") || passportType.contains("v") || passportType.contains("P") || passportType.contains("p") {
-//                return 19
-//            } else if (country == "ESP") {
-//                return 19
-//            } else {
-//                return 19
-//            }
-//        } else {
-//            return 19
-//        }
       return  self.arrDocumentData.count
     }
     
@@ -945,19 +933,12 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.selectionStyle = .none
             if let imageFace: UIImage =  dictResultData[KEY_FACE_IMAGE]  as? UIImage{
                 cell.User_img2.isHidden = true
-//                if (UIDevice.current.orientation == .landscapeRight) {
-//                    cell.user_img.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
-//                } else if (UIDevice.current.orientation == .landscapeLeft) {
-//                    cell.user_img.transform = CGAffineTransform(rotationAngle: CGFloat(-(Double.pi / 2)))
-//                }
                 cell.user_img.image = imageFace
-                ///UIImageWriteToSavedPhotosAlbum(imageFace, nil, nil, nil)
             }
             if dictResultData[KEY_FACE_IMAGE2] != nil{
              cell.User_img2.isHidden = false
                 if let imageFace: UIImage =  dictResultData[KEY_FACE_IMAGE2]  as? UIImage{
                     cell.User_img2.image = imageFace
-                    //UIImageWriteToSavedPhotosAlbum(imageFace, nil, nil, nil)
                 }
             }
             return cell
@@ -1302,124 +1283,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         return nil
     }
-    
-    func image(toNSString image: UIImage?) -> String? {
-        let imageData: Data? = nil
-        return imageData?.base64EncodedString(options: .lineLength64Characters)
-    }
-    
-    func image(byCroppingImage image: UIImage?, to size: CGSize) -> UIImage? {
-        // not equivalent to image.size (which depends on the imageOrientation)!
-        
-        var width = Double((size.width * 2))
-        var hidth = Double((size.height * 2))
-        let fullWidth = Double(UIScreen.main.bounds.size.width)
-        var getX: Double = fullWidth - width
-        
-        let fullHeigtht = Double(UIScreen.main.bounds.size.height)
-        var getY: Double = fullHeigtht / 2
-        getY = hidth / 4
-        
-        if (UIDevice.current.orientation == .portrait) {
-            let with: Double = fullWidth * 0.95
-            let hite: Double = fullHeigtht * 0.35
-            
-            width = with * 2
-            hidth = hite * 2
-            getX = fullWidth - with
-            getY = fullHeigtht / 2
-            getY = getY - (hite / 2)
-        }
-        if (UIDevice.current.orientation == .landscapeRight) {
-            let with: Double = fullWidth * 0.85
-            let hite: Double = fullHeigtht * 0.80
-            
-            width = with * 2
-            hidth = hite * 2
-            hidth = hidth - 200
-            getX = fullWidth - with
-            getY = fullHeigtht / 2
-            getY = getY - (hite / 2)
-        }
-        
-        if (UIDevice.current.orientation == .landscapeLeft) {
-            let with: Double = fullWidth * 0.85
-            let hite: Double = fullHeigtht * 0.80
-            
-            width = with * 2
-            hidth = hite * 2
-            getX = fullWidth - with
-            getY = fullHeigtht / 2
-            getY = getY - (hite / 2)
-            hidth = hidth - 200
-        }
-        
-        let cropRect = CGRect(x: getX / 2, y: getY, width: width, height: hidth)
-        let imageRef = image!.cgImage?.cropping(to: cropRect)
-        
-        var cropped: UIImage? = nil
-        if let imageRef = imageRef {
-            cropped = UIImage(cgImage: imageRef)
-        }
-        
-        return cropped
-    }
 }
-
-extension String {
-    func subString(from: Int, to: Int) -> String {
-        guard !self.isEmpty else {
-            return ""
-        }
-        
-        let startIndex = self.index(self.startIndex, offsetBy: from)
-        let endIndex = self.index(self.startIndex, offsetBy: to)
-        return String(self[startIndex...endIndex])
-    }
-}
-
-extension UIImage{
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)//CGRectMake(0, 0, newSize.width, newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage ?? UIImage()
-    }
-    
-    func resizeImageWithoutScale(image: UIImage, targetSize: CGSize) -> UIImage {
-        var newSize: CGSize
-        newSize = CGSize(width: targetSize.width,  height: targetSize.height)
-        let rect = CGRect(x: 0, y: 0, width: targetSize.width, height: targetSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-    }
-}
-
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {

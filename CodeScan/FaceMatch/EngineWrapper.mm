@@ -1,10 +1,7 @@
 //
 //  EngineWrapper.m
 //  FaceMatch
-//
-//  Created by Caroll on 2/24/17.
-//  Copyright © 2017 Caroll. All rights reserved.
-//
+
 
 #include <opencv2/imgproc/imgproc.hpp>
 #import "EngineWrapper.h"
@@ -31,7 +28,6 @@ int g_nEngineInit = -100;
     
     SResult ret = InitEngine([dataFilePath1 UTF8String], [dataFilePath2 UTF8String], [licensePath UTF8String]);
     
-//    SResult ret = InitEngine("", "");
     g_nEngineInit = ret;
 }
 
@@ -45,6 +41,12 @@ int g_nEngineInit = -100;
     return g_nEngineInit;
 }
 
+/**
+ * This method use for identify face match score.
+ * Parameters to Pass: front image data and back image data.
+ *
+ * This method will return int score.
+ */
 +(double) Identify:(NSData*)pbuff1 featurebuff2:(NSData*)pbuff2
 {
     float* feature1 = (float*)[pbuff1 bytes];
@@ -53,7 +55,6 @@ int g_nEngineInit = -100;
     int   len2 = [pbuff2 length];
     
     float score = 0.0;
-//    if (len1 == len2 && len1 == 1316) {
     if (len1 == 0 || len2 == 0 || feature1 == nil || feature2 == nil)
         return 0.0f;
     
@@ -62,10 +63,15 @@ int g_nEngineInit = -100;
         {
             return 0.0;
         }
-//    }
     return score;
 }
 
+/**
+ * This method use for identify face in front image.
+ * Parameters to Pass: front image data
+ *
+ * This method will return image.
+ */
 +(NSFaceRegion*) DetectSourceFaces:(UIImage*) image
 {
     
@@ -99,7 +105,6 @@ int g_nEngineInit = -100;
             CGFloat fh = (CGFloat)rect.Height;
             
             region.bound = CGRectMake(fx, fy, fw, fh);
-//            region.bound = CGRectMake(0, 0, 0, 0);
 
             region.confidence = pFaces.Confidence;
             region.face = 1;
@@ -109,11 +114,16 @@ int g_nEngineInit = -100;
         }
     }
     region.image = [ImageHelper imageWithBits:pFaces.pNewImg withSize:CGSizeMake(pFaces.dwNewWidth, pFaces.dwNewHeight)];
-//    region.image = image;
     free(inbits);
     return region;
 }
 
+/**
+ * This method use for identify face in back image which found in front image.
+ * Parameters to Pass: back image and front image data
+ *
+ * This method will return image.
+ */
 +(NSFaceRegion*) DetectTargetFaces:(UIImage*) image feature1:(NSData*) feature1
 {
     
@@ -148,7 +158,6 @@ int g_nEngineInit = -100;
             CGFloat fh = (CGFloat)rect.Height;
             
             region.bound = CGRectMake(fx, fy, fw, fh);
-//            region.bound = CGRectMake(0, 0, 0, 0);
             region.confidence = pFaces.Confidence;
             region.face = 1;
             
@@ -157,7 +166,6 @@ int g_nEngineInit = -100;
         }
     }
     region.image = [ImageHelper imageWithBits:pFaces.pNewImg withSize:CGSizeMake(pFaces.dwNewWidth, pFaces.dwNewHeight)];
-//    region.image = image;
     free(inbits);
     return region;
 }

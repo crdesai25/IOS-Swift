@@ -1,10 +1,7 @@
 //
 //  ImageVC.swift
 //  AccuraSDK
-//
-//  Created by Zignuts Technolab on 07/06/19.
-//  Copyright © 2019 Elite Development LLC. All rights reserved.
-//
+
 
 import UIKit
 import SVProgressHUD
@@ -53,14 +50,12 @@ class ImageVC: UIViewController, AVCapturePhotoCaptureDelegate {
         isDismiss = true
     }
     
-    /*
-     This method use image rotated particular degrees
-     Parameters to Pass: UIImage and croping degrees
-     
-     This method will return crop UIImage
-     and then explain the use of return value
-     
-     */
+    /**
+    * This method use image rotated particular degrees
+    * Parameters to Pass: UIImage and croping degrees
+    *
+    * This method will return crop UIImage
+    **/
     
     func imageRotated(byDegrees oldImage: UIImage?, deg degrees: CGFloat) -> UIImage? {
         // calculate the size of the rotated view's containing box for our drawing space
@@ -88,10 +83,10 @@ class ImageVC: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     
-    /*
-     This method use scanning frame
-     Device orientation acoding set scanning view frame
-     */
+    /**
+    * This method use scanning frame
+    * Device orientation acoding set scanning view frame
+    */
     func ChangedOrintation() {
         if (UIDevice.current.orientation == .landscapeLeft) {
             //do something or rather
@@ -252,14 +247,13 @@ class ImageVC: UIViewController, AVCapturePhotoCaptureDelegate {
         present(alert, animated: true)
     }
     
-    /*
-     This method use image Orientation particular angle
-     Parameters to Pass: UIImage
-     
-     This method will return  UIImage
-     and then explain the use of return value
-     
-     */
+    /**
+    * This method use image Orientation particular angle
+    * Parameters to Pass: UIImage
+    *
+    * This method will return  UIImage
+    */
+    
     func fixedOrientation(_ image: UIImage?) -> UIImage? {
         
         //if let img = image {
@@ -311,14 +305,14 @@ class ImageVC: UIViewController, AVCapturePhotoCaptureDelegate {
         return UIImage(cgImage: cgImage)
         
     }
-    /*
-     This method use image resize particular size
-     Parameters to Pass: UIImage and resize size
-     
-     This method will return resize UIImage
-     and then explain the use of return value
-     
-     */
+    
+    /**
+     * This method use image resize particular size
+     * Parameters to Pass: UIImage and resize size
+     *
+     * This method will return resize UIImage
+     **/
+    
     func image(withResize image: UIImage?, convertTo size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         image?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
@@ -454,7 +448,6 @@ class ImageVC: UIViewController, AVCapturePhotoCaptureDelegate {
                                             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
                                                 self.navigationController?.popViewController(animated: true)
                                             }))
-                                            //alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                                             self.present(alert, animated: true, completion: nil)
                                         }
                                             
@@ -557,14 +550,13 @@ class ImageVC: UIViewController, AVCapturePhotoCaptureDelegate {
         return "Boundary-\(NSUUID().uuidString)"
     }
     
-    /*
-     This method use image crop particular size
-     Parameters to Pass: UIImage and croping size
-     
-     This method will return crop UIImage
-     and then explain the use of return value
-     
-     */
+    /**
+    * This method use image crop particular size
+    * Parameters to Pass: UIImage and croping size
+    *
+    * This method will return crop UIImage
+    */
+    
     func croppIngimage(byImageName imageToCrop: UIImage, to rect: CGRect) -> UIImage? {
         let image: UIImage? = imageToCrop
         let deviceScreen: CGRect = UIScreen.main.bounds

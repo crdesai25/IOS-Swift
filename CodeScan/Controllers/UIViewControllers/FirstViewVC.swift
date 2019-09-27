@@ -1,10 +1,6 @@
 //
 //  FirstViewVC.swift
 //  AccuraSDK
-//
-//  Created by Zignuts Technolab on 8/19/19.
-//  Copyright © 2019 Elite Development LLC. All rights reserved.
-//
 
 import UIKit
 

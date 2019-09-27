@@ -1,10 +1,7 @@
 //
 //  FaceImageView.m
 //  FaceMatch
-//
-//  Created by Caroll on 3/12/19.
-//  Copyright © 2019 Caroll. All rights reserved.
-//
+
 
 #import "FaceImageView.h"
 #import "NSFaceRegion.h"
@@ -51,7 +48,6 @@
         CGContextMoveToPoint(currentContext,
                              x1,
                              y1);
-        //    CGContextAddLineToPoint(currentContext, currentContext, 0);
         
         /* And end it at this point */
         CGContextAddLineToPoint(currentContext,

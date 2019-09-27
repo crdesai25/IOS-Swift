@@ -1,10 +1,7 @@
 //
 //  DrivingPDFstringTableViewCell.swift
 //  AccuraSDK
-//
-//  Created by SSD on 08/09/18.
-//  Copyright © 2018 Elite Development LLC. All rights reserved.
-//
+
 
 import UIKit
 

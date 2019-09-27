@@ -3,7 +3,6 @@
 //
 
 //#import "Util.h"
-#import "WebAPIRequest.h"
 #import "WebServiceUrl.h"
 //#include "ViewController.h"
 
@@ -11,7 +10,6 @@
 #import "WebServiceUrl.h"
 #import <MessageUI/MessageUI.h>
 #include "LibXL/libxl.h"
-#import "WebAPIRequest.h"
 #import "GlobalMethods.h"
 #import "EngineWrapper.h"
 #import "FaceView.h"

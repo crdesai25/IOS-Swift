@@ -450,8 +450,6 @@ class CodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate, Sele
             else {
                 valueArr.add(emptyDictionary["DAC"]!)
                 keyArr.add("FIRST NAME: ")
-                // valueArr.add(emptyDictionary["DAC"]!)
-                // keyArr.add("GIVEN NAME: ")
             }
             
             

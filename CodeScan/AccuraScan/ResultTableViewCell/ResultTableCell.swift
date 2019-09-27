@@ -1,10 +1,7 @@
 //
 //  ResultTableCell.swift
 //  AccuraSDK
-//
-//  Created by Deepak Jain on 09/06/19.
-//  Copyright © 2019 Elite Development LLC. All rights reserved.
-//
+
 
 import UIKit
 

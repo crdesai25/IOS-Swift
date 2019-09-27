@@ -1,16 +1,6 @@
 /*****************************************************************************
  *   ViewController.m
- ******************************************************************************
- *   by Kirill Kornyakov and Alexander Shishkov, 13th May 2013
- ******************************************************************************
- *   Chapter 10 of the "OpenCV for iOS" book
- *
- *   Capturing Video from Camera shows how to capture video
- *   stream from camera.
- *
- *   Copyright Packt Publishing 2013.
- *   http://bit.ly/OpenCV_for_iOS_book
- *****************************************************************************/
+ ******************************************************************************/
 
 
 #import "zinterface.h"
@@ -20,16 +10,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MessageUI/MessageUI.h>
 #include "LibXL/libxl.h"
-#import "WebAPIRequest.h"
 #include <opencv2/imgproc/imgproc.hpp>
 #import "GlobalMethods.h"
-//#import <AccuraSDK-Swift.h>
+
 
 @interface ViewController ()<UIActionSheetDelegate,MFMailComposeViewControllerDelegate>
 {
     BOOL isPdf;
     NSMutableArray *dataArr,*scanInfoArray;
-   // ModelManager *mgrObj;
+
 }
 @end
 
@@ -146,17 +135,12 @@ bool bMrzFirst = false;
                                      preferredStyle:UIAlertControllerStyleAlert];
         
         //Add Buttons
-        
         UIAlertAction* yesButton = [UIAlertAction
                                     actionWithTitle:@"Ok"
                                     style:UIAlertActionStyleDefault
                                     handler:^(UIAlertAction * action) {
-                                        //                                        BOOL canOpenSettings = (&UIApplicationOpenSettingsURLString != NULL);
-                                        //                                        if (canOpenSettings) {
                                         UIApplication *application = [UIApplication sharedApplication];
                                         [application openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
-                                        
-                                        //                                        }
                                         
                                     }];
         
@@ -312,10 +296,7 @@ bool bMrzFirst = false;
 /*
  Call to Opencv framework method
  Parameters to Pass: scanning image CV::Mat metrix
- 
  This method will return UIImage
- and then explain the use of return value
- 
  */
 
 UIImage* uiimageFromCVMat(cv::Mat &cvMat)
@@ -367,7 +348,6 @@ UIImage* uiimageFromCVMat(cv::Mat &cvMat)
  Parameters to Pass: scanning image
  
  This method will return CV::Mat metrix
- and then explain the use of return value
  
  */
 cv::Mat cvMatFromUIImage(UIImage* image)
@@ -462,6 +442,7 @@ cv::Mat cvMatFromUIImage(UIImage* image)
     [_imageView setImage:uiimageFromCVMat(matShow)];
     matShow.release();
 }
+
 NSString *previouslines = @"";
 - (void) Recog_Thread
 {
@@ -543,14 +524,9 @@ NSString *previouslines = @"";
         
         tf = CACurrentMediaTime() - tf;
         NSLog(@"recogend %f",tf);
-        //splits[0].release();
-        //splits[1].release();
-        //splits[2].release();
         if(success == true)
         {
             lines = [NSString stringWithUTF8String:chlines];
-            //if ([lines isEqualToString:previouslines])
-            // {
             passportType = [NSString stringWithUTF8String:chtype];
             country = [NSString stringWithUTF8String:chcountry];
             surName = [NSString stringWithUTF8String:chsurname];
@@ -837,74 +813,6 @@ NSString *previouslines = @"";
 }
 
 /*
- This method use image crop particular size
- Parameters to Pass: UIImage and croping size
- 
- This method will return crop UIImage
- and then explain the use of return value
- 
- */
-- (UIImage *)imageByCroppingImage:(UIImage* )image toSize:(CGSize)size
-{
-    // not equivalent to image.size (which depends on the imageOrientation)!
-    
-    double width = (size.width * 2);
-    double hidth = (size.height * 2);
-    double fullWidth = image.size.width;
-    double getX = fullWidth - width;
-    
-    double fullHeigtht = image.size.height;
-    double getY = fullHeigtht / 2;
-    getY = hidth / 4;
-    
-    if ( ([[UIDevice currentDevice] orientation] ==  UIDeviceOrientationPortrait)  ) {
-        double with = fullWidth * 0.95;
-        double hite = fullHeigtht * 0.35;
-        
-        width = with ;
-        hidth = hite;
-        getX = fullWidth - with;
-        getY = (fullHeigtht / 2);
-        getY = getY - (hite / 2);
-    }else if ( ([[UIDevice currentDevice] orientation] ==  UIDeviceOrientationLandscapeRight)  ) {
-        double with = fullWidth * 0.85;
-        double hite = fullHeigtht * 0.80;
-        
-        width = with ;
-        hidth = hite;
-        hidth = hidth;
-        getX = fullWidth - with;
-        getY = fullHeigtht / 2;
-        getY = getY - (hite / 2);
-    }else if ( ([[UIDevice currentDevice] orientation] ==  UIDeviceOrientationLandscapeLeft)  ) {
-        double with = fullWidth * 0.85;
-        double hite = fullHeigtht * 0.80;
-        
-        width = with ;
-        hidth = hite;
-        getX = fullWidth - with;
-        getY = fullHeigtht / 2;
-        getY = getY - (hite / 2);
-        hidth = hidth;
-    }else{
-        double with = fullWidth * 0.95;
-        double hite = fullHeigtht * 0.35;
-        
-        width = with ;
-        hidth = hite;
-        getX = fullWidth - with;
-        getY = (fullHeigtht / 2);
-        getY = getY - (hite / 2);
-    }
-    
-    CGRect cropRect = CGRectMake((getX/2), getY - 40 , width, hidth);
-    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage],  cropRect);
-    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
-    return cropped;
-}
-
-/*
  This method in identified image orientation
  */
 - (void)imageRotation:(NSString* )imageRotation
@@ -923,7 +831,6 @@ NSString *previouslines = @"";
     else{//@"FontOnlyImg"
         fontImageRotation = strRotation;
     }
-    
-    
 }
+
 @end

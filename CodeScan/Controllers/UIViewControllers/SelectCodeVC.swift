@@ -3,6 +3,7 @@
 //  CodeScan
 //
 //  ******************** File use to display list of barcode (for select or deselect particular barcode) ******************
+
 import UIKit
 import AVFoundation
 
