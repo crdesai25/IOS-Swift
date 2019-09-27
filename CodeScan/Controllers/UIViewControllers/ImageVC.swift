@@ -7,8 +7,6 @@ import UIKit
 import SVProgressHUD
 import AVFoundation
 
-
-
 class ImageVC: UIViewController, AVCapturePhotoCaptureDelegate {
     
     //MARK:-Outlet

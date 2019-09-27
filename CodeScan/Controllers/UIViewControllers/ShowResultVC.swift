@@ -15,7 +15,7 @@ let KEY_FACE_IMAGE      =  "KEY_FACE_IMAGE"
 let KEY_FACE_IMAGE2     =  "KEY_FACE_IMAGE2"
 let KEY_DOC1_IMAGE      =  "KEY_DOC1_IMAGE"
 let KEY_DOC2_IMAGE      =  "KEY_DOC2_IMAGE"
-var MY_ZOOM_DEVELOPER_APP_TOKEN1: String = "dUfNhktz2Tcl32pGgbPTZ57QujOQBluh"
+var MY_ZOOM_DEVELOPER_APP_TOKEN1: String  = "dUfNhktz2Tcl32pGgbPTZ57QujOQBluh"
 
 class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate,ZoomVerificationDelegate,CustomAFNetWorkingDelegate {
    
@@ -90,7 +90,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             EngineWrapper.faceEngineInit() //Declaration EngineWrapper
         }
         
-        let fmValue = EngineWrapper.getEngineInitValue() //get engineWrapper load status value
+        let fmValue = EngineWrapper.getEngineInitValue() //get engineWrapper load status
         if fmValue == -20{
             GlobalMethods.showAlertView("key not found", with: self)
         }else if fmValue == -15{
@@ -136,7 +136,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                         self.photoImage = UIImage(data: data!)
                         self.faceRegion = nil;
                         if (self.photoImage != nil){
-                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage)
+                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage) //Identify face in Document scanning image
                         }
                         let dict = [KEY_FACE_IMAGE: self.photoImage] as [String : AnyObject]
                         if !self.arrDocumentData.isEmpty{
@@ -183,7 +183,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                         self.photoImage = UIImage(data: data!)
                         self.faceRegion = nil;
                         if (self.photoImage != nil){
-                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage)
+                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage) //Identify face in Document scanning image
                         }
                         let dict = [KEY_FACE_IMAGE: self.photoImage] as [String : AnyObject]
                         if !self.arrDocumentData.isEmpty{
@@ -288,7 +288,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.photoImage = UIImage(data: image_photoImage)
                 self.faceRegion = nil;
                 if (self.photoImage != nil){
-                    self.faceRegion = EngineWrapper.detectSourceFaces(photoImage)
+                    self.faceRegion = EngineWrapper.detectSourceFaces(photoImage) //Identify face in Document scanning image
                 }
             }
             
@@ -338,6 +338,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // ZoomScanning SDK Reset
         Zoom.sdk.preload()
     }
     
@@ -606,7 +607,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             return;
         }
             
-        let vc = Zoom.sdk.createVerificationVC(delegate: self)//createVerificationVC(delegate: self)
+        let vc = Zoom.sdk.createVerificationVC(delegate: self)//Zoom SDK set Delegate
         
         let colors: [AnyObject] = [UIColor(red: 0.04, green: 0.71, blue: 0.64, alpha: 1).cgColor,UIColor(red: 0.07, green: 0.57, blue: 0.76, alpha: 1).cgColor]
         self.configureGradientBackground(arrcolors: colors, inLayer: vc.view.layer)
@@ -626,6 +627,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func initializeZoom(){
+        //Initialize the ZoOm SDK using your app token
         Zoom.sdk.initialize(appToken: MY_ZOOM_DEVELOPER_APP_TOKEN1) { (validationResult) in
             if validationResult {
                 print("AppToken validated successfully")
@@ -636,16 +638,16 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
         }
         
-        // Create the customization object
+        // Configures the look and feel of Zoom
         var currentCustomization = ZoomCustomization()
-        currentCustomization.showPreEnrollmentScreen = false;
+        currentCustomization.showPreEnrollmentScreen = false; //show Pre-Enrollment screens
         
         // Sample UI Customization: vertically center the ZoOm frame within the device's display
         centerZoomFrameCustomization(currentCustomization);
         
         // Apply the customization changes
-        Zoom.sdk.setCustomization(currentCustomization)//setCustomization = currentCustomization
-        Zoom.sdk.auditTrailType = .height640//ZoomAuditTrailTypeHeight640
+        Zoom.sdk.setCustomization(currentCustomization)
+        Zoom.sdk.auditTrailType = .height640 //Sets the type of audit trail images to be collected
     }
     
     func showInitFailedDialog(){
@@ -899,10 +901,10 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBAction func btnLivenessAction(_ sender: UIButton) {
         uniqStr = ProcessInfo.processInfo.globallyUniqueString
         if pageType == .Default{
-            self.launchZoomToVerifyLivenessAndRetrieveFacemap()
+            self.launchZoomToVerifyLivenessAndRetrieveFacemap() //lunchZoom setup
         }else{
             if photoImage != nil{
-               self.launchZoomToVerifyLivenessAndRetrieveFacemap()
+               self.launchZoomToVerifyLivenessAndRetrieveFacemap() //lunchZoom setup
             }
         }
     }
@@ -1044,10 +1046,8 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
 
-    
     //MARK:- ZoomVerification Methods
     func onZoomVerificationResult(result: ZoomVerificationResult) {
-        
         if result.status == .failedBecauseEncryptionKeyInvalid{
             let alert = UIAlertController(title: "Public Key Not Set.", message: "Retrieving facemaps requires that you generate a public/private key pair per the instructions at https://dev.zoomlogin.com/zoomsdk/#/zoom-server-guide", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
@@ -1061,11 +1061,14 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
+    /**
+     * This method use to get liveness image and face match score
+     * Parameters to Pass: ZoomVerificationResult data
+     *
+     */
     func handleVerificationSuccessResult(result:ZoomVerificationResult){
-        let faceMetrics: ZoomFaceBiometricMetrics = result.faceMetrics!
-        var _: NSData = faceMetrics.zoomFacemap! as NSData
-        let _: ZoomDevicePartialLivenessResult = faceMetrics.devicePartialLivenessResult
-        let _: Float = faceMetrics.devicePartialLivenessScore
+     
+        let faceMetrics: ZoomFaceBiometricMetrics = result.faceMetrics!  // faceMetrics data is user scanning face
         var faceImage2: UIImage? = nil
      
         if faceMetrics.auditTrail !=  nil &&  faceMetrics.auditTrail!.count > 0{
@@ -1073,7 +1076,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             for (index,var dict) in arrDocumentData.enumerated(){
                 for st in dict.keys{
                     if st == KEY_FACE_IMAGE{
-                        dict[KEY_FACE_IMAGE2] = faceMetrics.auditTrail![0]
+                        dict[KEY_FACE_IMAGE2] = faceMetrics.auditTrail![0] // auditTrail data is userface image
                         arrDocumentData[index] = dict
                         isFindImg = true
                         break
@@ -1089,7 +1092,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             //Find Facematch score
             if (faceRegion != nil)
             {
-                let face2 = EngineWrapper.detectTargetFaces(faceImage2, feature1: faceRegion!.feature)
+                let face2 = EngineWrapper.detectTargetFaces(faceImage2, feature1: faceRegion!.feature) //identify face in back image which found in front image
                 let fm_Score = EngineWrapper.identify(faceRegion!.feature, featurebuff2: face2!.feature) //Find Match Score
                 let twoDecimalPlaces = String(format: "%.2f", fm_Score*100) //Match score Convert Float Value
                 self.removeOldValue("FACEMATCH SCORE : ")
@@ -1110,10 +1113,15 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.handleResultFromFaceTecManagedRESTAPICall(_result: result)
     }
     
+    /**
+     * This method use to get liveness score
+     * Parameters to Pass: ZoomVerificationResult user scanning data
+     *
+     */
     func handleResultFromFaceTecManagedRESTAPICall(_result:ZoomVerificationResult){
         if(_result.faceMetrics != nil)
         {
-            let zoomFacemap = _result.faceMetrics?.zoomFacemap
+            let zoomFacemap = _result.faceMetrics?.zoomFacemap //zoomFacemap is Biometric Facemap
             let zoom = zoomFacemap?.base64EncodedString(options: [])
             print("call liveness api only")
             
@@ -1122,6 +1130,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             dictPara["sessionId"] = _result.sessionId
             dictPara["facemap"] = zoom
 
+            //Call liveness Api
             let apiObject = CustomAFNetWorking(post: WS_liveness, withTag: LivenessTag, withParameter: dictPara)
             apiObject?.delegate = self
         }
@@ -1154,11 +1163,11 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             self.faceRegion = nil;
             if (self.photoImage != nil){
-                self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage)
+                self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage) //Identify face in Document scanning image
             }
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 if (self.faceRegion != nil){
-                    let face2 : NSFaceRegion = EngineWrapper.detectTargetFaces(chosenImage, feature1: self.faceRegion?.feature)
+                    let face2 : NSFaceRegion = EngineWrapper.detectTargetFaces(chosenImage, feature1: self.faceRegion?.feature)  //identify face in back image which found in front image
                     let fm_Score = EngineWrapper.identify(self.faceRegion!.feature, featurebuff2: face2.feature) //Find FaceMatch Score
                     if(fm_Score != 0.0){
                         var isFindImg: Bool = false

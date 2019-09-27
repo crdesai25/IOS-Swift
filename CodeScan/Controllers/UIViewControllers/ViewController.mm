@@ -444,6 +444,7 @@ cv::Mat cvMatFromUIImage(UIImage* image)
 }
 
 NSString *previouslines = @"";
+
 - (void) Recog_Thread
 {
     threadrunning = YES;
@@ -458,7 +459,6 @@ NSString *previouslines = @"";
             [lock unlock];
             continue;
         }
-        //        UIImage* img11 = uiimageFromCVMat(_matOrg);
         CFTimeInterval tf = CACurrentMediaTime();
         cv::Mat splits[4];
         cv::split(_matOrg, splits);
@@ -646,7 +646,9 @@ NSString *previouslines = @"";
         [self._imgFlipView setHidden:true];
     }];
 }
-
+/*
+ * This method call document scan success
+*/
 - (void) Recog_Successed
 {
     NSLog(@"Recog successed");
@@ -758,7 +760,6 @@ NSString *previouslines = @"";
 
 -(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue
 {
-    NSLog(@"I did an unwind segway! Holy crap!");
     
 }
 

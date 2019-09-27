@@ -25,11 +25,10 @@ class PlaceHolderVC: UIViewController {
     }
     
     @IBAction func back(toPlaceHolder segue: UIStoryboardSegue?) {
-        print("I did an unwind segway! Holy crap!")
     }
     
     @IBAction func prepare(forUnwind segue: UIStoryboardSegue?) {
-        print("I did an unwind segway! Holy crap!")
+        
     }
 
 }

@@ -199,41 +199,41 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
     func setFaceRegion(_ image: UIImage) {
         var faceRegion : NSFaceRegion?
         if(selectFirstImage){
-            faceRegion = EngineWrapper.detectSourceFaces(image)
+            faceRegion = EngineWrapper.detectSourceFaces(image) //Identify face in Document scanning image
         }else{
-            let face1 : NSFaceRegion? = faceView1.getFaceRegion();
+            let face1 : NSFaceRegion? = faceView1.getFaceRegion(); // Get image data
             if (face1 == nil) {
-                faceRegion = EngineWrapper.detectSourceFaces(image);
+                faceRegion = EngineWrapper.detectSourceFaces(image); //Identify face in Document scanning image
             } else {
-                faceRegion = EngineWrapper.detectTargetFaces(image, feature1: face1?.feature);
+                faceRegion = EngineWrapper.detectTargetFaces(image, feature1: face1?.feature); //Identify face in back image which found in front image
             }
         }
         
         if (selectFirstImage){
             if (faceRegion != nil){
                 image1.isHidden = true
-                faceView1.setFaceRegion(faceRegion)
-                faceView1.setImage(faceRegion?.image)
+                faceView1.setFaceRegion(faceRegion) //Draw square face around
+                faceView1.setImage(faceRegion?.image) //Set document image
                 faceView1.setNeedsDisplay()
                 faceView1.isHidden = false
                 imgUpload.isHidden = true
                 txtUpload.isHidden = true
             }
             
-            let face2 : NSFaceRegion? = faceView2.getFaceRegion();
+            let face2 : NSFaceRegion? = faceView2.getFaceRegion(); // Get image data
             if (face2 != nil) {
-                let face1 : NSFaceRegion? = faceView1.getFaceRegion();
+                let face1 : NSFaceRegion? = faceView1.getFaceRegion(); // Get image data
                 var faceRegion2 : NSFaceRegion?
                 if (face1 == nil){
-                    faceRegion2 = EngineWrapper.detectSourceFaces(face2?.image)
+                    faceRegion2 = EngineWrapper.detectSourceFaces(face2?.image) //Identify face in Document scanning image
                 }else{
-                    faceRegion2 = EngineWrapper.detectTargetFaces(face2?.image, feature1: face2?.feature)
+                    faceRegion2 = EngineWrapper.detectTargetFaces(face2?.image, feature1: face2?.feature)  //Identify face in back image which found in front
                 }
                 
                 if(faceRegion2 != nil){
                     image2.isHidden = true
-                    faceView2.setFaceRegion(faceRegion2)
-                    faceView2.setImage(faceRegion2?.image)
+                    faceView2.setFaceRegion(faceRegion2) //Draw square face around
+                    faceView2.setImage(faceRegion2?.image) //Set document image
                     faceView2.setNeedsDisplay()
                     imgUpload2.isHidden = true
                     txtUpload2.isHidden = true
@@ -244,14 +244,14 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
             image1.isHidden = true
             image2.isHidden = true
             
-            faceView2.setFaceRegion(faceRegion)
-            faceView2.setImage(faceRegion?.image)
+            faceView2.setFaceRegion(faceRegion) //Draw square face around
+            faceView2.setImage(faceRegion?.image) //Set document image
             faceView2.setNeedsDisplay()
             imgUpload2.isHidden = true
             txtUpload2.isHidden = true
         }
-        let face1:NSFaceRegion? = faceView1.getFaceRegion()
-        let face2:NSFaceRegion? = faceView2.getFaceRegion()
+        let face1:NSFaceRegion? = faceView1.getFaceRegion() // Get image data
+        let face2:NSFaceRegion? = faceView2.getFaceRegion() // Get image data
         
         if (face1?.face == 0 || face2?.face == 0){
             lableMatchRate.text = "Match Score : 0.0 %";
