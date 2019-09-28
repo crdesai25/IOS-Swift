@@ -31,7 +31,12 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
     //MARK:- UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        let fmInit = EngineWrapper.isEngineInit()  //Check engineWrapper init or not init
+        /*
+         SDK method call to engineWrapper init
+         @Return: init status bool value
+         */
+        
+        let fmInit = EngineWrapper.isEngineInit()
         if !fmInit{
             EngineWrapper.faceEngineInit() //Declaration EngineWrapper
         }
@@ -43,8 +48,11 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let fmValue = EngineWrapper.getEngineInitValue() //get engineWrapper load status value
+        /*
+         SDK method call to get engineWrapper load status
+         @Return: init status Int value
+         */
+        let fmValue = EngineWrapper.getEngineInitValue()
         if fmValue == -20{
             GlobalMethods.showAlertView("key not found", with: self)
         }else if fmValue == -15{
@@ -199,21 +207,45 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
     func setFaceRegion(_ image: UIImage) {
         var faceRegion : NSFaceRegion?
         if(selectFirstImage){
-            faceRegion = EngineWrapper.detectSourceFaces(image) //Identify face in Document scanning image
+            /*
+             FaceMatch SDK method call to Identify face in Document scanning image
+             @Params: BackImage, Front Face Image
+             @Return: Face data
+             */
+            faceRegion = EngineWrapper.detectSourceFaces(image)
         }else{
             let face1 : NSFaceRegion? = faceView1.getFaceRegion(); // Get image data
             if (face1 == nil) {
-                faceRegion = EngineWrapper.detectSourceFaces(image); //Identify face in Document scanning image
+                /*
+                 FaceMatch SDK method call to Identify face in Document scanning image
+                 @Params: BackImage, Front Face Image
+                 @Return: Face data
+                 */
+                faceRegion = EngineWrapper.detectSourceFaces(image);
             } else {
-                faceRegion = EngineWrapper.detectTargetFaces(image, feature1: face1?.feature); //Identify face in back image which found in front image
+                /*
+                 FaceMatch SDK method call to detect Face in back image
+                 @Params: BackImage, Front Face Image faceRegion
+                 @Return: Face Image Frame
+                 */
+                faceRegion = EngineWrapper.detectTargetFaces(image, feature1: face1?.feature);
             }
         }
         
         if (selectFirstImage){
             if (faceRegion != nil){
                 image1.isHidden = true
-                faceView1.setFaceRegion(faceRegion) //Draw square face around
-                faceView1.setImage(faceRegion?.image) //Set document image
+                /*
+                 SDK method call to draw square face around
+                 @Params: BackImage, Front Image faceRegion Data
+                 */
+                faceView1.setFaceRegion(faceRegion)
+                
+                /*
+                 SDK method call to draw square face around
+                 @Params: BackImage, Front faceRegion Image
+                 */
+                faceView1.setImage(faceRegion?.image)
                 faceView1.setNeedsDisplay()
                 faceView1.isHidden = false
                 imgUpload.isHidden = true
@@ -225,15 +257,34 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
                 let face1 : NSFaceRegion? = faceView1.getFaceRegion(); // Get image data
                 var faceRegion2 : NSFaceRegion?
                 if (face1 == nil){
-                    faceRegion2 = EngineWrapper.detectSourceFaces(face2?.image) //Identify face in Document scanning image
+                    /*
+                     FaceMatch SDK method call to Identify face in Document scanning image
+                     @Params: BackImage, Front Face Image
+                     @Return: Face data
+                     */
+                    faceRegion2 = EngineWrapper.detectSourceFaces(face2?.image) 
                 }else{
+                    /*
+                     FaceMatch SDK method call to detect Face in back image
+                     @Params: BackImage, Front Face Image faceRegion
+                     @Return: Face Image Frame
+                     */
                     faceRegion2 = EngineWrapper.detectTargetFaces(face2?.image, feature1: face2?.feature)  //Identify face in back image which found in front
                 }
                 
                 if(faceRegion2 != nil){
                     image2.isHidden = true
-                    faceView2.setFaceRegion(faceRegion2) //Draw square face around
-                    faceView2.setImage(faceRegion2?.image) //Set document image
+                    /*
+                     SDK method call to draw square face around
+                     @Params: BackImage, Front Image faceRegion Data
+                     */
+                    faceView2.setFaceRegion(faceRegion2)
+                    /*
+                     SDK method call to draw square face around
+                     @Params: BackImage, Front faceRegion Image
+                     */
+                    faceView2.setImage(faceRegion2?.image)
+                    
                     faceView2.setNeedsDisplay()
                     imgUpload2.isHidden = true
                     txtUpload2.isHidden = true
@@ -244,8 +295,16 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
             image1.isHidden = true
             image2.isHidden = true
             
-            faceView2.setFaceRegion(faceRegion) //Draw square face around
-            faceView2.setImage(faceRegion?.image) //Set document image
+            /*
+             SDK method call to draw square face around
+             @Params: BackImage, Front Image faceRegion Data
+             */
+            faceView2.setFaceRegion(faceRegion)
+            /*
+             SDK method call to draw square face around
+             @Params: BackImage, Front faceRegion Image
+             */
+            faceView2.setImage(faceRegion?.image) 
             faceView2.setNeedsDisplay()
             imgUpload2.isHidden = true
             txtUpload2.isHidden = true
@@ -253,14 +312,20 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         let face1:NSFaceRegion? = faceView1.getFaceRegion() // Get image data
         let face2:NSFaceRegion? = faceView2.getFaceRegion() // Get image data
         
-        if (face1?.face == 0 || face2?.face == 0){
+        if ((face1?.face == 0 || face1 == nil) || (face2?.face == 0 || face2 == nil)){
             lableMatchRate.text = "Match Score : 0.0 %";
             return
         }
         arrDocument.removeAll()
         arrDocument.append(face1?.image ?? UIImage())
         arrDocument.append(face2?.image ?? UIImage())
-        let fmSore = EngineWrapper.identify(face1?.feature, featurebuff2: face2?.feature) //Find FaceMatch Score
+        
+        /*
+         SDK method call to get FaceMatch Score
+         @Params: FrontImage Face, BackImage Face
+         @Return: Match Score
+         */
+        let fmSore = EngineWrapper.identify(face1?.feature, featurebuff2: face2?.feature) 
         let twoDecimalPlaces = String(format: "%.2f", fmSore*100) //Match score Convert Float Value
         lableMatchRate.text = "Match Score : \(twoDecimalPlaces) %"
         self.sendMail("\(twoDecimalPlaces)") //Call Send mail api

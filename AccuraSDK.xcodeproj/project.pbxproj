@@ -113,7 +113,6 @@
 		A36D91BE230C57D900B01801 /* FaceMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36D91BD230C57D900B01801 /* FaceMatchViewController.swift */; };
 		A37FE4E0230FA0B20003E672 /* ShowResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37FE4DF230FA0B10003E672 /* ShowResultVC.swift */; };
 		A37FE4E4230FB8C60003E672 /* CustomAFNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = A37FE4E3230FB8C60003E672 /* CustomAFNetWorking.m */; };
-		A382E694230AA71400C56EAE /* LibXL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9AF4C6211995B300700EDF /* LibXL.framework */; };
 		A382E69A230AA94800C56EAE /* FirstViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382E697230AA94700C56EAE /* FirstViewVC.swift */; };
 		A382E69B230AA94800C56EAE /* FirstTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A382E698230AA94800C56EAE /* FirstTableViewCell.xib */; };
 		A382E69C230AA94800C56EAE /* FirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382E699230AA94800C56EAE /* FirstTableViewCell.swift */; };
@@ -207,7 +206,6 @@
 		5C94E021211ACA8200428686 /* Aller_Std_LtIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aller_Std_LtIt.ttf; sourceTree = "<group>"; };
 		5C94E022211ACA8200428686 /* Aller_Std_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aller_Std_Rg.ttf; sourceTree = "<group>"; };
 		5C94E023211ACA8200428686 /* AllerDisplay_Std_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AllerDisplay_Std_Rg.ttf; sourceTree = "<group>"; };
-		5C9AF4C6211995B300700EDF /* LibXL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LibXL.framework; sourceTree = "<group>"; };
 		5C9AF4F32119995800700EDF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		5C9AF4F52119996D00700EDF /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		5C9AF4F72119997700700EDF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -307,7 +305,6 @@
 				5C9AF4F62119996D00700EDF /* libz.1.dylib in Frameworks */,
 				5C9AF4F42119995800700EDF /* libsqlite3.dylib in Frameworks */,
 				A32D56C02334CC7900E3D4A2 /* AccuraOCR.a in Frameworks */,
-				A382E694230AA71400C56EAE /* LibXL.framework in Frameworks */,
 				A32D56C12334CC7900E3D4A2 /* AccuraFace.a in Frameworks */,
 				F17B5D65C6994F277B2EC726 /* Pods_AccuraSDK.framework in Frameworks */,
 			);
@@ -686,7 +683,6 @@
 				A32D56BF2334CC7900E3D4A2 /* AccuraFace.a */,
 				A32D56BE2334CC7900E3D4A2 /* AccuraOCR.a */,
 				A341D728230E9AE400FDF946 /* ZoomAuthenticationHybrid.framework */,
-				5C9AF4C6211995B300700EDF /* LibXL.framework */,
 			);
 			path = Framework;
 			sourceTree = "<group>";

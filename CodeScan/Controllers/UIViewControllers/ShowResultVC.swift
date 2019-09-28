@@ -83,13 +83,21 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         
         var dictScanningData:NSDictionary = NSDictionary()
-        
         isFirstTime = true
-        let fmInit = EngineWrapper.isEngineInit() //Check engineWrapper init or not init
+
+        /*
+         SDK method call to engineWrapper init
+         @Return: init status bool value
+         */
+        let fmInit = EngineWrapper.isEngineInit() 
         if !fmInit{
             EngineWrapper.faceEngineInit() //Declaration EngineWrapper
         }
         
+        /*
+         SDK method call to get engineWrapper load status
+         @Return: init status Int value
+         */
         let fmValue = EngineWrapper.getEngineInitValue() //get engineWrapper load status
         if fmValue == -20{
             GlobalMethods.showAlertView("key not found", with: self)
@@ -136,7 +144,12 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                         self.photoImage = UIImage(data: data!)
                         self.faceRegion = nil;
                         if (self.photoImage != nil){
-                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage) //Identify face in Document scanning image
+                            /*
+                             FaceMatch SDK method call to Identify face in Document scanning image
+                             @Params: BackImage, Front Face Image
+                             @Return: Face data
+                             */
+                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage)
                         }
                         let dict = [KEY_FACE_IMAGE: self.photoImage] as [String : AnyObject]
                         if !self.arrDocumentData.isEmpty{
@@ -167,7 +180,6 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             
             if let image_documentImage: UIImage = dictScanningData["KEY_DOC1_IMAGE"] as? UIImage {
-                // self.photoImage = image_photoImage
                 appDocumentImage.append(image_documentImage)
             }
             
@@ -183,7 +195,12 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                         self.photoImage = UIImage(data: data!)
                         self.faceRegion = nil;
                         if (self.photoImage != nil){
-                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage) //Identify face in Document scanning image
+                            /*
+                             FaceMatch SDK method call to Identify face in Document scanning image
+                             @Params: BackImage, Front Face Image
+                             @Return: Face data
+                             */
+                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage)
                         }
                         let dict = [KEY_FACE_IMAGE: self.photoImage] as [String : AnyObject]
                         if !self.arrDocumentData.isEmpty{
@@ -215,7 +232,6 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             
             if let image_documentImage: UIImage = dictScanningData["KEY_DOC1_IMAGE"] as? UIImage {
-                // self.photoImage = image_photoImage
                 appDocumentImage.append(image_documentImage)
             }
             
@@ -288,7 +304,12 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.photoImage = UIImage(data: image_photoImage)
                 self.faceRegion = nil;
                 if (self.photoImage != nil){
-                    self.faceRegion = EngineWrapper.detectSourceFaces(photoImage) //Identify face in Document scanning image
+                    /*
+                     FaceMatch SDK method call to Identify face in Document scanning image
+                     @Params: BackImage, Front Face Image
+                     @Return: Face data
+                     */
+                    self.faceRegion = EngineWrapper.detectSourceFaces(photoImage)
                 }
             }
             
@@ -304,7 +325,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         //**************************************************************//
         
-        //Register Tablr cell
+        //Register Table cell
         self.tblResult.register(UINib.init(nibName: "UserImgTableCell", bundle: nil), forCellReuseIdentifier: "UserImgTableCell")
         
         self.tblResult.register(UINib.init(nibName: "ResultTableCell", bundle: nil), forCellReuseIdentifier: "ResultTableCell")
@@ -1089,11 +1110,22 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             matchImage = faceImage2 ?? UIImage();
             liveImage = faceImage2 ?? UIImage();
             
-            //Find Facematch score
             if (faceRegion != nil)
             {
-                let face2 = EngineWrapper.detectTargetFaces(faceImage2, feature1: faceRegion!.feature) //identify face in back image which found in front image
-                let fm_Score = EngineWrapper.identify(faceRegion!.feature, featurebuff2: face2!.feature) //Find Match Score
+                /*
+                 FaceMatch SDK method call to detect Face in back image
+                 @Params: BackImage, Front Face Image faceRegion
+                 @Return: Face Image Frame
+                 */
+                
+                let face2 = EngineWrapper.detectTargetFaces(faceImage2, feature1: faceRegion!.feature)
+                
+                /*
+                 SDK method call to get FaceMatch Score
+                 @Params: FrontImage Face, BackImage Face
+                 @Return: Match Score
+                 */
+                let fm_Score = EngineWrapper.identify(faceRegion!.feature, featurebuff2: face2!.feature)
                 let twoDecimalPlaces = String(format: "%.2f", fm_Score*100) //Match score Convert Float Value
                 self.removeOldValue("FACEMATCH SCORE : ")
                 let dict = [KEY_VALUE: "\((twoDecimalPlaces))",KEY_TITLE:"FACEMATCH SCORE : "] as [String : AnyObject]
@@ -1163,12 +1195,27 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             self.faceRegion = nil;
             if (self.photoImage != nil){
-                self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage) //Identify face in Document scanning image
+                /*
+                 FaceMatch SDK method call to Identify face in Document scanning image
+                 @Params: BackImage, Front Face Image
+                 @Return: Face data
+                 */
+                self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage)
             }
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 if (self.faceRegion != nil){
-                    let face2 : NSFaceRegion = EngineWrapper.detectTargetFaces(chosenImage, feature1: self.faceRegion?.feature)  //identify face in back image which found in front image
-                    let fm_Score = EngineWrapper.identify(self.faceRegion!.feature, featurebuff2: face2.feature) //Find FaceMatch Score
+                    /*
+                     FaceMatch SDK method call to detect Face in back image
+                     @Params: BackImage, Front Face Image faceRegion
+                     @Return: Face Image Frame
+                     */
+                    let face2 : NSFaceRegion = EngineWrapper.detectTargetFaces(chosenImage, feature1: self.faceRegion?.feature)  
+                    /*
+                     SDK method call to get FaceMatch Score
+                     @Params: FrontImage Face, BackImage Face
+                     @Return: Match Score
+                     */
+                    let fm_Score = EngineWrapper.identify(self.faceRegion!.feature, featurebuff2: face2.feature) 
                     if(fm_Score != 0.0){
                         var isFindImg: Bool = false
                         for (index,var dict) in self.arrDocumentData.enumerated(){

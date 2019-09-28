@@ -9,7 +9,6 @@
 #import "WebServiceUrl.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MessageUI/MessageUI.h>
-#include "LibXL/libxl.h"
 #include <opencv2/imgproc/imgproc.hpp>
 #import "GlobalMethods.h"
 
