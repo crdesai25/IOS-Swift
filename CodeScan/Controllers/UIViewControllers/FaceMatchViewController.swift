@@ -35,7 +35,6 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
          SDK method call to engineWrapper init
          @Return: init status bool value
          */
-        
         let fmInit = EngineWrapper.isEngineInit()
         if !fmInit{
             EngineWrapper.faceEngineInit() //Declaration EngineWrapper
@@ -75,6 +74,7 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         selectFirstImage = true
         imagePicker.sourceType = UIImagePickerController.SourceType.camera
         imagePicker.allowsEditing = false
+       imagePicker.modalPresentationStyle = .overCurrentContext
         self.present(imagePicker, animated: true, completion: nil)
     }
     
@@ -86,6 +86,7 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         selectFirstImage = false
         imagePicker.sourceType = UIImagePickerController.SourceType.camera
         imagePicker.allowsEditing = false
+        imagePicker.modalPresentationStyle = .overCurrentContext
         self.present(imagePicker, animated: true, completion: nil)
     }
     
@@ -178,14 +179,7 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         DispatchQueue.global(qos: .background).async {
             guard var originalImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage else { return }
             
-            //Capture Image Left flipped
-            if picker.sourceType == UIImagePickerController.SourceType.camera && picker.cameraDevice == .front {
-                var flippedImage: UIImage? = nil
-                if let CGImage = originalImage.cgImage {
-                    flippedImage = UIImage(cgImage: CGImage, scale: originalImage.scale, orientation: .leftMirrored)
-                }
-                originalImage = flippedImage!
-            }
+
             //Image Resize
             let ratio = CGFloat(originalImage.size.width) / originalImage.size.height
             originalImage = self.compressimage(with: originalImage, convertTo: CGSize(width: 600 * ratio, height: 600))!
