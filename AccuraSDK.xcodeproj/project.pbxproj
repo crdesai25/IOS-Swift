@@ -108,7 +108,6 @@
 		A341D72E230E9B7600FDF946 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A341D72D230E9B7600FDF946 /* MainStoryboard_iPhone.storyboard */; };
 		A341D732230EA28600FDF946 /* PlacePanCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A341D72F230EA28600FDF946 /* PlacePanCardVC.swift */; };
 		A341D734230EA28600FDF946 /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A341D731230EA28600FDF946 /* ImageVC.swift */; };
-		A35E4E74230A62F400D1B410 /* valid.license in Resources */ = {isa = PBXBuildFile; fileRef = A35E4E73230A62F400D1B410 /* valid.license */; };
 		A36D91BE230C57D900B01801 /* FaceMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36D91BD230C57D900B01801 /* FaceMatchViewController.swift */; };
 		A37FE4E0230FA0B20003E672 /* ShowResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37FE4DF230FA0B10003E672 /* ShowResultVC.swift */; };
 		A37FE4E4230FB8C60003E672 /* CustomAFNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = A37FE4E3230FB8C60003E672 /* CustomAFNetWorking.m */; };
@@ -116,8 +115,6 @@
 		A382E69B230AA94800C56EAE /* FirstTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A382E698230AA94800C56EAE /* FirstTableViewCell.xib */; };
 		A382E69C230AA94800C56EAE /* FirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382E699230AA94800C56EAE /* FirstTableViewCell.swift */; };
 		A382E6AF230AB69900C56EAE /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A382E6AD230AB69800C56EAE /* ViewController.mm */; };
-		A382E6B1230AB99C00C56EAE /* accuraface.license in Resources */ = {isa = PBXBuildFile; fileRef = A382E6B0230AB99C00C56EAE /* accuraface.license */; };
-		A382E6B3230ABFD100C56EAE /* key.license in Resources */ = {isa = PBXBuildFile; fileRef = A382E6B2230ABFD100C56EAE /* key.license */; };
 		DC75E60220BF36FB0096BC5A /* CodeInfoV.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75E60120BF36FB0096BC5A /* CodeInfoV.swift */; };
 		DC75E60420BF370A0096BC5A /* CodeInfoV.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC75E60320BF370A0096BC5A /* CodeInfoV.xib */; };
 		F17B5D65C6994F277B2EC726 /* Pods_AccuraSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B1E5ACBB7521B13715541C2 /* Pods_AccuraSDK.framework */; };
@@ -255,7 +252,6 @@
 		A341D72F230EA28600FDF946 /* PlacePanCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacePanCardVC.swift; sourceTree = "<group>"; };
 		A341D731230EA28600FDF946 /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		A341D735230EA44F00FDF946 /* ZoomHybrid.pub */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZoomHybrid.pub; sourceTree = "<group>"; };
-		A35E4E73230A62F400D1B410 /* valid.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = valid.license; sourceTree = "<group>"; };
 		A36D91BD230C57D900B01801 /* FaceMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceMatchViewController.swift; sourceTree = "<group>"; };
 		A36D91D2230C7FAD00B01801 /* faceengine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = faceengine.h; sourceTree = "<group>"; };
 		A36D91D3230C7FAE00B01801 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
@@ -268,8 +264,6 @@
 		A382E6AB230AB63E00C56EAE /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		A382E6AD230AB69800C56EAE /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		A382E6AE230AB69900C56EAE /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A382E6B0230AB99C00C56EAE /* accuraface.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = accuraface.license; sourceTree = "<group>"; };
-		A382E6B2230ABFD100C56EAE /* key.license */ = {isa = PBXFileReference; lastKnownFileType = file; name = key.license; path = "../New Group/key.license"; sourceTree = "<group>"; };
 		A3BD2BF48CC8B09BF1D1065E /* Pods-Accura Scan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accura Scan.release.xcconfig"; path = "Pods/Target Support Files/Pods-Accura Scan/Pods-Accura Scan.release.xcconfig"; sourceTree = "<group>"; };
 		A681A200B0E9D89F47FBE4CA /* Pods-AccuraSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccuraSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AccuraSDK/Pods-AccuraSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		B4512A7270DA0EFB6B68CCA9 /* Pods-Accura Scan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accura Scan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Accura Scan/Pods-Accura Scan.debug.xcconfig"; sourceTree = "<group>"; };
@@ -667,9 +661,6 @@
 		A38570EB2318018500FF7209 /* License */ = {
 			isa = PBXGroup;
 			children = (
-				A382E6B0230AB99C00C56EAE /* accuraface.license */,
-				A35E4E73230A62F400D1B410 /* valid.license */,
-				A382E6B2230ABFD100C56EAE /* key.license */,
 			);
 			path = License;
 			sourceTree = "<group>";
@@ -786,17 +777,14 @@
 				0021909122ACE79D00E08B01 /* ListTableCell.xib in Resources */,
 				A382E69B230AA94800C56EAE /* FirstTableViewCell.xib in Resources */,
 				00238B5C22AD680E0031BADB /* DocumentTableCell.xib in Resources */,
-				A35E4E74230A62F400D1B410 /* valid.license in Resources */,
 				5C94E02A211ACA8200428686 /* AllerDisplay_Std_Rg.ttf in Resources */,
 				8432A28D213517A8006BA16A /* DrivingPDF.xib in Resources */,
 				617EB0CE20BB60A800BCBFD9 /* SelectCodeVC.storyboard in Resources */,
 				5C94E028211ACA8200428686 /* Aller_Std_LtIt.ttf in Resources */,
-				A382E6B1230AB99C00C56EAE /* accuraface.license in Resources */,
 				6104CC7F20BB4E6D00AC428E /* CodeScanVC.storyboard in Resources */,
 				00238B5822AD67F80031BADB /* UserImgTableCell.xib in Resources */,
 				617EB0D920BB69DD00BCBFD9 /* BarcodeTypeTVC.xib in Resources */,
 				5C67D9A72111E48C00154EB7 /* SVProgressHUD.bundle in Resources */,
-				A382E6B3230ABFD100C56EAE /* key.license in Resources */,
 				A33ED5C7230EA6EB00005B85 /* ZoomHybrid.pub in Resources */,
 				030BEC0C2269EFCB002450E0 /* cam.png in Resources */,
 				5C67D99F2111E46400154EB7 /* mMQDF_f_Passport_bottom.dic in Resources */,
