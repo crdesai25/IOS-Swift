@@ -573,7 +573,6 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
             }
         }
-     self.sendMail()
     }
     
     /**
@@ -708,155 +707,6 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tblResult.reloadData()
     }
     
-    //MARK:- Api Calling
-    func sendMail(){
-        DispatchQueue.global(qos: .background).async {
-            var subjectTitle: String = ""
-            var mailBody: String = ""
-            var givenNames: String = ""
-            var surName: String = ""
-            var fmScr : String = ""
-            var liveScr : String = ""
-            var cardType : String = ""
-            var faceImage: UIImage?
-            var arrDocument: [UIImage] = [UIImage]()
-            let br = "<br/>";
-            //=============================== Mail Body =============================== //
-            for dictFinalData in self.arrDocumentData{
-                if dictFinalData[KEY_TITLE] != nil{
-                    if dictFinalData[KEY_TITLE] as! String == "LAST NAME : "{
-                        surName = dictFinalData[KEY_VALUE] as! String
-                    }
-                    if dictFinalData[KEY_TITLE] as! String == "FIRST NAME : "{
-                        givenNames = dictFinalData[KEY_VALUE] as! String
-                    }
-                }
-                
-                if dictFinalData[KEY_FACE_IMAGE2] != nil {
-                    faceImage = dictFinalData[KEY_FACE_IMAGE2] as? UIImage
-                }
-                
-                if dictFinalData[KEY_DOC1_IMAGE] != nil{
-                    arrDocument.append(dictFinalData[KEY_DOC1_IMAGE] as! UIImage)
-                }
-                
-                if dictFinalData[KEY_DOC2_IMAGE] != nil{
-                    arrDocument.append(dictFinalData[KEY_DOC2_IMAGE] as! UIImage)
-                }
-            }
-            
-            
-            if self.obj_AppDelegate.selectedScanType == .AccuraScan{
-                fmScr = self.getValue(stKey: "FACEMATCH SCORE : ")
-                if !fmScr.isEmpty{
-                    mailBody += "FaceMatch Score: \(fmScr) \(br)"
-                }
-                
-                liveScr = self.getValue(stKey: "LIVENESS SCORE : ")
-                if !liveScr.isEmpty{
-                    mailBody += "Liveness Score: \(liveScr) \(br)"
-                }
-                
-            }
-            
-            if self.pageType == .ScanAadhar{ //Aadhar Card
-                subjectTitle  = "iOS Test - Aadhar + \(givenNames) \(surName)" //Mail Title
-                mailBody += "Document: \(self.getValue(stKey: "DOCUMENT : ")) \(br)"
-                mailBody += "Last Name: \(self.getValue(stKey: "LAST NAME : ")) \(br)"
-                mailBody += "First Name: \(self.getValue(stKey: "FIRST NAME : ")) \(br)"
-                mailBody += "Addhar Card No: \(self.getValue(stKey: "AADHAR CARD NO : ")) \(br)"
-                mailBody += "Country: \(self.getValue(stKey: "COUNTRY : ")) \(br)"
-                mailBody += "Sex: \(self.getValue(stKey: "SEX : ")) \(br)"
-                mailBody += "Date of Birth: \(self.getValue(stKey: "DATE OF BIRTH : ")) \(br)"
-                mailBody += "Address: \(self.getValue(stKey: "ADDRESS : ")) \(br)"
-            }
-            else if self.pageType == .ScanPan{ //Pan Card
-                subjectTitle  = "iOS Test - PAN + \(givenNames) \(surName)" //Mail Title
-                mailBody += "Document: \(self.getValue(stKey: "DOCUMENT : ")) \(br)"
-                mailBody += "Last Name: \(self.getValue(stKey: "LAST NAME : ")) \(br)"
-                mailBody += "First Name: \(self.getValue(stKey: "FIRST NAME : ")) \(br)"
-                mailBody += "Pan Card No: \(self.getValue(stKey: "PAN CARD NO : ")) \(br)"
-                mailBody += "Country: \(self.getValue(stKey: "COUNTRY : ")) \(br)"
-                mailBody += "Date of Birth: \(self.getValue(stKey: "DATE OF BIRTH : ")) \(br)"
-            }else{ //Passport
-                subjectTitle  = "iOS Test - MRZ + \(givenNames) \(surName)" //Mail Title
-                
-                mailBody += "Document: \(self.getValue(stKey: "DOCUMENT TYPE : ")) \(br)"
-                mailBody += "Last Name: \(self.getValue(stKey: "LAST NAME : ")) \(br)"
-                mailBody += "First Name: \(self.getValue(stKey: "FIRST NAME : ")) \(br)"
-                mailBody += "Document No: \(self.getValue(stKey: "DOCUMENT NO : ")) \(br)"
-                mailBody += "Document Check Number: \(self.getValue(stKey: "DOCUMENT CHECK NUMBER : ")) \(br)"
-                mailBody += "Country: \(self.getValue(stKey: "COUNTRY : ")) \(br)"
-                mailBody += "Nationality: \(self.getValue(stKey: "NATIONALITY : ")) \(br)"
-                mailBody += "Sex: \(self.getValue(stKey: "SEX : ")) \(br)"
-                mailBody += "Date of Birth: \(self.getValue(stKey: "DATE OF BIRTH : ")) \(br)"
-                mailBody += "Birth Check Number: \(self.getValue(stKey: "BIRTH CHECK NUMBER : ")) \(br)"
-                mailBody += "Expiration Check Number: \(self.getValue(stKey: "EXPIRATION CHECK NUMBER : ")) \(br)"
-                mailBody += "Date Of Expiry: \(self.getValue(stKey: "DATE OF EXPIRY : ")) \(br)"
-                mailBody += "Other ID: \(self.getValue(stKey: "OTHER ID : ")) \(br)"
-                mailBody += "Other ID Check: \(self.getValue(stKey: "OTHER ID CHECK : ")) \(br)"
-                mailBody += "Second Row Check Number: \(self.getValue(stKey: "SECOND ROW CHECK NUMBER : ")) \(br)"
-                mailBody += "Result: \(self.getValue(stKey: "RESULT : ")) \(br)"
-            }
-            
-            
-            if self.obj_AppDelegate.selectedScanType == .AccuraScan{
-                if !self.stLivenessResult.isEmpty{
-                    mailBody += "Liveness Result : \(self.stLivenessResult) \(br)"
-                }
-            }
-            
-            if self.pageType == .ScanAadhar{
-                cardType = "Adharcard"
-            }else if self.pageType == .ScanPan{
-                cardType = "Pancard"
-            }else{
-                cardType = "MRZ"
-            }
-            //=============================== Mail Body =============================== //
-            
-            var dictParam: [String: String] = [String: String]()
-            dictParam["mailSubject"] = subjectTitle
-            dictParam["platform"] = "iOS"
-            dictParam["type"] = cardType
-            dictParam["facematch"] = fmScr == "" ? "False" : "True"
-            dictParam["liveness"] = liveScr == "" ? "False" : "True"
-            dictParam["mailBody"] = mailBody
-            
-            let sharedInstance = NetworkReachabilityManager()!
-            var isConnectedToInternet:Bool {
-                return sharedInstance.isReachable
-            }
-            if(isConnectedToInternet){
-                let post = PostResult()
-//                https://accurascan.com/sendEmailApi/sendEmail
-                post.postMethodWithParamsAndImage(parameters: dictParam, forMethod: "https://accurascan.com/sendEmailApi/sendEmail", image: arrDocument, faceImg: faceImage == nil ? nil : faceImage , success: { (response) in
-                    print(response)
-                }) { (error) in
-                    print(error)
-                }
-            }
-        }
-        
-    }
-    
-    /**
-     * This method is used to find value by key in array
-     * Param: filter key
-     * Return: value
-     */
-    func getValue(stKey: String) -> String {
-        let arrResult = arrDocumentData.filter( { (details: [String:AnyObject]) -> Bool in
-            return ("\(details[KEY_TITLE] ?? "" as AnyObject)" == stKey )
-        })
-        
-        let dictResult = arrResult.isEmpty ? [String:AnyObject]() : arrResult[0]
-        var stResult: String = ""
-        if dictResult[KEY_VALUE] != nil { stResult = "\(dictResult[KEY_VALUE] ?? "" as AnyObject)"  }
-        else{ stResult = "" }
-        return stResult
-    }
-    
     //MARK:- Image Rotation
     @objc func loadPhotoCaptured() {
         let img = allImageViewsSubViews(picker.viewControllers.first?.view)?.last
@@ -926,10 +776,10 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         picker.mediaTypes = ["public.image"]
         self.present(picker, animated: true, completion: nil)
     }
+    
     @IBAction func btnCancelAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
     
     //MARK: - UITableView Delegate and Datasource Method
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -1146,8 +996,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         {
             let zoomFacemap = _result.faceMetrics?.zoomFacemap //zoomFacemap is Biometric Facemap
             let zoom = zoomFacemap?.base64EncodedString(options: [])
-            print("call liveness api only")
-            
+
             //Call Liveness Api
             let dictPara: NSMutableDictionary = NSMutableDictionary()
             dictPara["sessionId"] = _result.sessionId
@@ -1236,7 +1085,6 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                     }else {
                         self.btnFaceMathch.isHidden = false
                     }
-                  self.sendMail() // Call Send mail Api
                 }
                 UIView.animate (withDuration: 0.1, animations: {
                     self.tblResult.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
@@ -1247,8 +1095,6 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             })
         }
     }
-    
-    
     
     //MARK:-  customURLConnection Delegate
     func customURLConnectionDidFinishLoading(_ connection: CustomAFNetWorking!, withTag tagCon: Int32, withResponse response: Any!) {
@@ -1275,9 +1121,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                     self.tblResult.reloadData()
                 }
             }
-         self.sendMail()
         }
-        
     }
     
     func customURLConnection(_ connection: CustomAFNetWorking!, withTag tagCon: Int32, didReceive response: URLResponse!) {

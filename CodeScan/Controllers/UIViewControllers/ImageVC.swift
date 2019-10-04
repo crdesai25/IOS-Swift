@@ -410,7 +410,7 @@ class ImageVC: UIViewController, AVCapturePhotoCaptureDelegate {
         }
         
         request?.httpMethod = "POST"
-        request?.setValue("1544605430AuefLvgk7yWX4nnApjO3f90MRARt9dkmJ4EQFVL7", forHTTPHeaderField: "Api-Key")
+        request?.setValue("add your key here", forHTTPHeaderField: "Api-Key")
         let boundary = generateBoundaryString()
         request?.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         

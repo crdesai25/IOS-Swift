@@ -113,7 +113,7 @@ int g_nEngineInit = -100;
                 
         }
     }
-    region.image = image;//[ImageHelper imageWithBits:pFaces.pNewImg withSize:CGSizeMake(pFaces.dwNewWidth, pFaces.dwNewHeight)];
+    region.image = image;
     free(inbits);
     return region;
 }
@@ -135,7 +135,7 @@ int g_nEngineInit = -100;
     unsigned char* inbits = [ImageHelper bitmapFromImage:image];
     if (inbits == NULL)
     {
-        NSLog(@"Image buffer is Null");
+        NSLog(@"Image buf fer is Null");
         return nil;
     }
     
@@ -165,7 +165,7 @@ int g_nEngineInit = -100;
             
         }
     }
-    region.image = image;//[ImageHelper imageWithBits:pFaces.pNewImg withSize:CGSizeMake(pFaces.dwNewWidth, pFaces.dwNewHeight)];
+    region.image = image;
     free(inbits);
     return region;
 }

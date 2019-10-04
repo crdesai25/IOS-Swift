@@ -1,10 +1,6 @@
 //
 //  NSObjectExtensions.swift
-//  Blueprint
-//
-//  Created by Stephen Muscarella on 3/24/18.
-//  Copyright © 2018 Elite Development LLC. All rights reserved.
-//
+
 import Foundation
 
 extension NSObject {

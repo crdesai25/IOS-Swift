@@ -23,7 +23,7 @@
 
 @implementation ViewController
 
-@synthesize _imageView,_videoCamera,_viewLayer, _constant_heigtt, _constant_width , _constant_Headerheigtt;
+@synthesize _imageView,_videoCamera,_viewLayer, _constant_heigtt, _constant_width ;
 
 NSLock *lock = [[NSLock alloc]init];
 int retval = 0;

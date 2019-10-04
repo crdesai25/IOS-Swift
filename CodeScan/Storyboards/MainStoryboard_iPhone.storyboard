@@ -1183,68 +1183,6 @@
                                                 <constraint firstItem="0Md-5q-8tg" firstAttribute="top" secondItem="p5a-NV-pHB" secondAttribute="top" id="huu-z9-IY0"/>
                                             </constraints>
                                         </view>
-                                        <view key="tableFooterView" contentMode="scaleToFill" id="uGK-Bc-mj3">
-                                            <rect key="frame" x="0.0" y="100" width="375" height="160"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available in Mobile and Web SDK / API Try it now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ct3-DC-9nf" userLabel="help">
-                                                    <rect key="frame" x="50" y="0.0" width="275" height="38.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUL-76-B4Z">
-                                                    <rect key="frame" x="30" y="58.5" width="315" height="40"/>
-                                                    <color key="backgroundColor" red="0.87450980389999999" green="0.28627450980000002" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="nod-LD-cty"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                    <state key="normal" title="Visit Accura Scan">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="visitAccuraScanBtnAction:" destination="uBx-dT-scY" eventType="touchUpInside" id="5je-2T-rSH"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2z-mf-Crf">
-                                                    <rect key="frame" x="30" y="113.5" width="315" height="40"/>
-                                                    <color key="backgroundColor" red="0.87450980389999999" green="0.28627450980000002" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="4Ek-PL-J6X"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                    <state key="normal" title="Email Us">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="emailUsBtnAction:" destination="uBx-dT-scY" eventType="touchUpInside" id="Hvi-j0-ejk"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstItem="NUL-76-B4Z" firstAttribute="leading" secondItem="uGK-Bc-mj3" secondAttribute="leading" constant="30" id="3FR-x6-YNH"/>
-                                                <constraint firstAttribute="trailing" secondItem="k2z-mf-Crf" secondAttribute="trailing" constant="30" id="4MR-lB-Khq"/>
-                                                <constraint firstItem="k2z-mf-Crf" firstAttribute="leading" secondItem="uGK-Bc-mj3" secondAttribute="leading" constant="30" id="Jn5-vV-CtE"/>
-                                                <constraint firstItem="Ct3-DC-9nf" firstAttribute="top" secondItem="uGK-Bc-mj3" secondAttribute="top" id="Mkz-cA-E7r"/>
-                                                <constraint firstItem="k2z-mf-Crf" firstAttribute="top" secondItem="NUL-76-B4Z" secondAttribute="bottom" constant="15" id="Qky-2E-SBt"/>
-                                                <constraint firstItem="NUL-76-B4Z" firstAttribute="top" secondItem="Ct3-DC-9nf" secondAttribute="bottom" constant="20" id="REC-yp-c7I"/>
-                                                <constraint firstItem="Ct3-DC-9nf" firstAttribute="centerX" secondItem="uGK-Bc-mj3" secondAttribute="centerX" id="f2a-WZ-wAm"/>
-                                                <constraint firstAttribute="trailing" secondItem="NUL-76-B4Z" secondAttribute="trailing" constant="30" id="fl8-mA-hek"/>
-                                                <constraint firstAttribute="bottom" secondItem="k2z-mf-Crf" secondAttribute="bottom" constant="6.6699999999999999" id="g56-is-8J2"/>
-                                            </constraints>
-                                        </view>
                                         <connections>
                                             <outlet property="dataSource" destination="uBx-dT-scY" id="T10-cw-YLV"/>
                                             <outlet property="delegate" destination="uBx-dT-scY" id="M9Y-ac-As0"/>

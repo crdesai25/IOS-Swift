@@ -27,11 +27,9 @@
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint* _constant_heigtt;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint* _constant_width;
 
-@property (nonatomic, strong) IBOutlet NSLayoutConstraint* _constant_Headerheigtt;
 
 extern NSMutableDictionary *shareScanningListing;
 
-@property (weak, nonatomic) IBOutlet UISwitch *switchPickPhoto;
 -(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue;
 - (IBAction)menuAction:(id)sender;
 

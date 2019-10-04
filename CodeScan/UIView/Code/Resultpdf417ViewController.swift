@@ -69,9 +69,6 @@ class Resultpdf417ViewController: UIViewController,UITableViewDataSource,UITable
             
         cell.lblpreTitle.text = keyArr[indexPath.row] as  String;
         cell.lblValuetitle.text = valueArr[indexPath.row] as  String;
-            
-            
-            
             return cell
         }
     }

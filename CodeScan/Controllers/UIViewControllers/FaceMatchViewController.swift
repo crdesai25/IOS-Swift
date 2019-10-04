@@ -326,38 +326,8 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         let fmSore = EngineWrapper.identify(face1?.feature, featurebuff2: face2?.feature) 
         let twoDecimalPlaces = String(format: "%.2f", fmSore*100) //Match score Convert Float Value
         lableMatchRate.text = "Match Score : \(twoDecimalPlaces) %"
-        self.sendMail("\(twoDecimalPlaces)") //Call Send mail api
     }
     
-    //MARK:- Api Calling
-    func sendMail(_ matchStore: String){
-        var subjectTitle: String = ""
-        var mailBody: String = ""
-        
-        let br = "<br/>";
-        
-        subjectTitle = "iOS Test - FM \(matchStore)"
-        mailBody = "Match Score : \(matchStore) \(br)"
-        var dictParam: [String: String] = [String: String]()
-        dictParam["mailSubject"] = subjectTitle
-        dictParam["platform"] = "iOS"
-        dictParam["facematch"] = "False"
-        dictParam["liveness"] = "False"
-        dictParam["mailBody"] = mailBody
-        
-        let sharedInstance = NetworkReachabilityManager()!
-        var isConnectedToInternet:Bool {
-            return sharedInstance.isReachable
-        }
-        if(isConnectedToInternet){
-            let post = PostResult()
-            post.postMethodWithParamsAndImage(parameters: dictParam, forMethod: "https://accurascan.com/sendEmailApi/sendEmail", image: arrDocument, faceImg:  nil , success: { (response) in
-                print(response)
-            }) { (error) in
-                print(error)
-            }
-        }
-    }
     
     /**
      * This method is used to compress image in particular size

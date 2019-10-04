@@ -105,7 +105,6 @@
 		A33ED5C7230EA6EB00005B85 /* ZoomHybrid.pub in Resources */ = {isa = PBXBuildFile; fileRef = A341D735230EA44F00FDF946 /* ZoomHybrid.pub */; };
 		A33ED5C8230EA83000005B85 /* ZoomAuthenticationHybrid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A341D728230E9AE400FDF946 /* ZoomAuthenticationHybrid.framework */; };
 		A33ED5C9230EA83000005B85 /* ZoomAuthenticationHybrid.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A341D728230E9AE400FDF946 /* ZoomAuthenticationHybrid.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A33ED5CB230EBFE100005B85 /* PostResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33ED5CA230EBFE100005B85 /* PostResult.swift */; };
 		A341D72E230E9B7600FDF946 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A341D72D230E9B7600FDF946 /* MainStoryboard_iPhone.storyboard */; };
 		A341D732230EA28600FDF946 /* PlacePanCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A341D72F230EA28600FDF946 /* PlacePanCardVC.swift */; };
 		A341D734230EA28600FDF946 /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A341D731230EA28600FDF946 /* ImageVC.swift */; };
@@ -251,7 +250,6 @@
 		9CECF16C6E84083F97DABCB3 /* Pods_Accura_Scan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accura_Scan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A32D56BE2334CC7900E3D4A2 /* AccuraOCR.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AccuraOCR.a; sourceTree = "<group>"; };
 		A32D56BF2334CC7900E3D4A2 /* AccuraFace.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AccuraFace.a; sourceTree = "<group>"; };
-		A33ED5CA230EBFE100005B85 /* PostResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostResult.swift; sourceTree = "<group>"; };
 		A341D728230E9AE400FDF946 /* ZoomAuthenticationHybrid.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZoomAuthenticationHybrid.framework; sourceTree = "<group>"; };
 		A341D72D230E9B7600FDF946 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		A341D72F230EA28600FDF946 /* PlacePanCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacePanCardVC.swift; sourceTree = "<group>"; };
@@ -463,7 +461,6 @@
 		5C67D9AE2111E4D200154EB7 /* WebRequestViewController  */ = {
 			isa = PBXGroup;
 			children = (
-				A33ED5CA230EBFE100005B85 /* PostResult.swift */,
 				5C67D9B12111E4D200154EB7 /* WebServiceUrl.h */,
 			);
 			path = "WebRequestViewController ";
@@ -895,7 +892,6 @@
 				617EB0D820BB69DD00BCBFD9 /* BarcodeTypeTVC.swift in Sources */,
 				5C2D6E9920CA406300031D42 /* AFWrapper.swift in Sources */,
 				1827A1A6230D0CB00026E8A8 /* DetectResult.m in Sources */,
-				A33ED5CB230EBFE100005B85 /* PostResult.swift in Sources */,
 				1827A1AB230D0CB00026E8A8 /* FaceView.m in Sources */,
 				1827A1AA230D0CB00026E8A8 /* ImageHelper.m in Sources */,
 				5C2D6E9A20CA406300031D42 /* CommonErrorAlert.swift in Sources */,
@@ -1087,7 +1083,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.accura.scan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bd774e2a-a901-4c51-a62a-d4139c0404c9";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Common Certy";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "CodeScan/AccuraScan/Accura Scan-Bridging-Header.h";
@@ -1139,7 +1135,6 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.accura.scan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0df309bd-d30e-4d00-8b2a-8eb53d990e6a";
 				PROVISIONING_PROFILE_SPECIFIER = "Common Certy";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "CodeScan/AccuraScan/Accura Scan-Bridging-Header.h";
