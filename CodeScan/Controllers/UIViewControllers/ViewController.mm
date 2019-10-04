@@ -191,8 +191,8 @@ bool bMrzFirst = false;
 }
 
 /*
- This method use scanning frame
- Device orientation acoding set scanning view frame
+ This method calls frame for scanning MRZ documents.
+ Device orientation according and sets scanning view frame
  */
 
 -(void)ChangedOrintation {
@@ -343,12 +343,11 @@ UIImage* uiimageFromCVMat(cv::Mat &cvMat)
 }
 
 /*
- Call to Opencv framework method
- Parameters to Pass: scanning image
- 
- This method will return CV::Mat metrix
- 
+ Call to OpenCV framework method
+ Param: scanning image
+ Return:Mat metrix
  */
+
 cv::Mat cvMatFromUIImage(UIImage* image)
 {
     if (image == nil) {
@@ -396,7 +395,7 @@ cv::Mat cvMatFromUIImage(UIImage* image)
 
 /*
  Delegate method for processing image frames
- Parameters to Pass: scanning cv::Mat metrix
+ Param: scanning cv::Mat metrix
  */
 
 - (void)processImage:(cv::Mat&)image //This function is called per every frame
@@ -496,12 +495,18 @@ NSString *previouslines = @"";
         
         // check the rectype
         if (recType == REC_INIT){
+            /*
+             SDK Method to do MRZ Scan
+             */
             retval = doRecogGrayImg_Passport(splits[2].data, splits[1].data, splits[0].data, w, h, chlines, success, chtype, chcountry, chsurname, chgivenname, chpassportnumber, chpassportchecksum, chnationality, chbirth, chbirthchecksum,chsex, chexpirationdate, chexpirationchecksum, chpersonalnumber, chpersonalnumberchecksum, chsecondrowchecksum,chplaceofbirth,chplaceofissue, photoChannels[0], photoChannels[1], photoChannels[2],&phoW, &phoH, bPickPhoto,(char*)[path UTF8String]);
             
             if (success == false && reccnt > 2)
             {
                 if (retface < 1)
                 {
+                    /*
+                     Detect face after MRZ scan
+                     */
                     retface = doFaceDetect(splits[2].data, splits[1].data, splits[0].data, w, h, photoChannels[0], photoChannels[1], photoChannels[2], &phoW, &phoH);
                 }
             }
@@ -516,6 +521,7 @@ NSString *previouslines = @"";
         {
             success = false;
             if (reccnt > 2)
+                // Detect user face on scanned image
                 retface = doFaceDetect(splits[2].data, splits[1].data, splits[0].data, w, h, photoChannels[0], photoChannels[1], photoChannels[2], &phoW, &phoH);
             
             reccnt++;
@@ -645,15 +651,17 @@ NSString *previouslines = @"";
         [self._imgFlipView setHidden:true];
     }];
 }
+
 /*
- * This method call document scan success
-*/
+ * Method called after MRZ scanned successfull
+ */
 - (void) Recog_Successed
 {
     NSLog(@"Recog successed");
     //check the rectype
     if (recType == REC_FACE)
     {
+        // If detected Face in scanned image
         docfrontImage = _imageView.image;
         [self imageRotation:@"FontImg"];
         if (!bRecDone)
@@ -665,6 +673,7 @@ NSString *previouslines = @"";
     }
     else if (recType == REC_MRZ)
     {
+        // If detected MRZ in scanned image
         documentImage = _imageView.image;
         [self imageRotation: @"BackImg"];
         if (bFaceReplace || bMrzFirst)
@@ -676,6 +685,7 @@ NSString *previouslines = @"";
         
         if (!bRecDone)
         {
+            // Ask to scan front side of document if face not detected
             [self._lblTitle setText:@"Scan Front Side of Document"];
             [self flipAnimation];
             return;
@@ -813,7 +823,7 @@ NSString *previouslines = @"";
 }
 
 /*
- This method in identified image orientation
+ Method to identify image orientation
  */
 - (void)imageRotation:(NSString* )imageRotation
 {

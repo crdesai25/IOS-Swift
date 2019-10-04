@@ -32,12 +32,16 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         /*
-         SDK method call to engineWrapper init
-         @Return: init status bool value
+         FaceMatch SDK method to check if engine is initiated or not
+         Return: true or false
          */
         let fmInit = EngineWrapper.isEngineInit()
         if !fmInit{
-            EngineWrapper.faceEngineInit() //Declaration EngineWrapper
+            /*
+             FaceMatch SDK method initiate SDK engine
+             */
+            
+            EngineWrapper.faceEngineInit()
         }
         imagePicker.delegate = self
         
@@ -48,10 +52,10 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         /*
-         SDK method call to get engineWrapper load status
-         @Return: init status Int value
+         Facematch SDK method to get SDK engine status after initialization
+         Return: -20 = Face Match license key not found, -15 = Face Match license is invalid.
          */
-        let fmValue = EngineWrapper.getEngineInitValue()
+        let fmValue = EngineWrapper.getEngineInitValue() //get engineWrapper load status
         if fmValue == -20{
             GlobalMethods.showAlertView("key not found", with: self)
         }else if fmValue == -15{
@@ -74,7 +78,7 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         selectFirstImage = true
         imagePicker.sourceType = UIImagePickerController.SourceType.camera
         imagePicker.allowsEditing = false
-       imagePicker.modalPresentationStyle = .overCurrentContext
+        imagePicker.modalPresentationStyle = .overCurrentContext
         self.present(imagePicker, animated: true, completion: nil)
     }
     
@@ -95,11 +99,10 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
     }
     
     //MARK:- Custom Methods
-   
+    
     /**
      * This method use to check permission photoLibrary and camera
      * Parameters to Pass: bool value first time page open
-     *
      */
     
     func openPhotosLibrary(_isFirst: Bool){
@@ -179,7 +182,7 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         DispatchQueue.global(qos: .background).async {
             guard var originalImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage else { return }
             
-
+            
             //Image Resize
             let ratio = CGFloat(originalImage.size.width) / originalImage.size.height
             originalImage = self.compressimage(with: originalImage, convertTo: CGSize(width: 600 * ratio, height: 600))!
@@ -202,25 +205,25 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         var faceRegion : NSFaceRegion?
         if(selectFirstImage){
             /*
-             FaceMatch SDK method call to Identify face in Document scanning image
-             @Params: BackImage, Front Face Image
-             @Return: Face data
+             Accura Face SDK method to detect user face from document image
+             Param: Document image
+             Return: User Face
              */
             faceRegion = EngineWrapper.detectSourceFaces(image)
         }else{
             let face1 : NSFaceRegion? = faceView1.getFaceRegion(); // Get image data
             if (face1 == nil) {
                 /*
-                 FaceMatch SDK method call to Identify face in Document scanning image
-                 @Params: BackImage, Front Face Image
-                 @Return: Face data
+                 Accura Face SDK method to detect user face from document image
+                 Param: Document image
+                 Return: User Face
                  */
                 faceRegion = EngineWrapper.detectSourceFaces(image);
             } else {
                 /*
-                 FaceMatch SDK method call to detect Face in back image
-                 @Params: BackImage, Front Face Image faceRegion
-                 @Return: Face Image Frame
+                 Accura Face SDK method to detect user face from selfie or camera stream
+                 Params: User photo, user face found in document scanning
+                 Return: User face from user photo
                  */
                 faceRegion = EngineWrapper.detectTargetFaces(image, feature1: face1?.feature);
             }
@@ -252,16 +255,16 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
                 var faceRegion2 : NSFaceRegion?
                 if (face1 == nil){
                     /*
-                     FaceMatch SDK method call to Identify face in Document scanning image
-                     @Params: BackImage, Front Face Image
-                     @Return: Face data
+                     Accura Face SDK method to detect user face from document image
+                     Param: Document image
+                     Return: User Face
                      */
                     faceRegion2 = EngineWrapper.detectSourceFaces(face2?.image) 
                 }else{
                     /*
-                     FaceMatch SDK method call to detect Face in back image
-                     @Params: BackImage, Front Face Image faceRegion
-                     @Return: Face Image Frame
+                     Accura Face SDK method to detect user face from selfie or camera stream
+                     Params: User photo, user face found in document scanning
+                     Return: User face from user photo
                      */
                     faceRegion2 = EngineWrapper.detectTargetFaces(face2?.image, feature1: face2?.feature)  //Identify face in back image which found in front
                 }
@@ -315,9 +318,10 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         arrDocument.append(face2?.image ?? UIImage())
         
         /*
-         SDK method call to get FaceMatch Score
+         FaceMatch SDK method call to get FaceMatch Score
          @Params: FrontImage Face, BackImage Face
          @Return: Match Score
+         
          */
         let fmSore = EngineWrapper.identify(face1?.feature, featurebuff2: face2?.feature) 
         let twoDecimalPlaces = String(format: "%.2f", fmSore*100) //Match score Convert Float Value
@@ -347,7 +351,7 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
         }
         if(isConnectedToInternet){
             let post = PostResult()
-            post.postMethodWithParamsAndImage(parameters: dictParam, forMethod: "https://accurascan.com/sendEmailApi/sendEmail.php", image: arrDocument, faceImg:  nil , success: { (response) in
+            post.postMethodWithParamsAndImage(parameters: dictParam, forMethod: "https://accurascan.com/sendEmailApi/sendEmail", image: arrDocument, faceImg:  nil , success: { (response) in
                 print(response)
             }) { (error) in
                 print(error)
@@ -356,10 +360,9 @@ class FaceMatchViewController: UIViewController,UIImagePickerControllerDelegate,
     }
     
     /**
-     * This method use image compress particular size
-     * Parameters to Pass: UIImage and covert size
-     *
-     * This method will return compress UIImage
+     * This method is used to compress image in particular size
+     * Param: UIImage and covert size
+     * Return: compress UIImage
      */
     func compressimage(with image: UIImage?, convertTo size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContext(size)
@@ -385,3 +388,4 @@ fileprivate func convertToUIImagePickerControllerInfoKeyDictionary(_ input: [Str
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
     return input.rawValue
 }
+ 

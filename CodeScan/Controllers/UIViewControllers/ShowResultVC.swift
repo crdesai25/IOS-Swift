@@ -86,17 +86,22 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         isFirstTime = true
 
         /*
-         SDK method call to engineWrapper init
-         @Return: init status bool value
+         FaceMatch SDK method to check if engine is initiated or not
+         Return: true or false
          */
         let fmInit = EngineWrapper.isEngineInit() 
         if !fmInit{
-            EngineWrapper.faceEngineInit() //Declaration EngineWrapper
+            
+            /*
+             FaceMatch SDK method initiate SDK engine
+             */
+            
+            EngineWrapper.faceEngineInit()
         }
         
         /*
-         SDK method call to get engineWrapper load status
-         @Return: init status Int value
+         Facematch SDK method to get SDK engine status after initialization
+         Return: -20 = Face Match license key not found, -15 = Face Match license is invalid.
          */
         let fmValue = EngineWrapper.getEngineInitValue() //get engineWrapper load status
         if fmValue == -20{
@@ -115,7 +120,9 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             btnFaceMathch.isHidden = false
             btnCancel.isHidden = false
             
-            //Set Zoom Controller
+            /*
+             Initialize Zoom SDK and set Controller
+             */
             self.initializeZoom()
         }
         
@@ -144,12 +151,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                         self.photoImage = UIImage(data: data!)
                         self.faceRegion = nil;
                         if (self.photoImage != nil){
-                            /*
-                             FaceMatch SDK method call to Identify face in Document scanning image
-                             @Params: BackImage, Front Face Image
-                             @Return: Face data
-                             */
-                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage)
+                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage) //Identify face in Document scanning image
                         }
                         let dict = [KEY_FACE_IMAGE: self.photoImage] as [String : AnyObject]
                         if !self.arrDocumentData.isEmpty{
@@ -195,18 +197,12 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                         self.photoImage = UIImage(data: data!)
                         self.faceRegion = nil;
                         if (self.photoImage != nil){
-                            /*
-                             FaceMatch SDK method call to Identify face in Document scanning image
-                             @Params: BackImage, Front Face Image
-                             @Return: Face data
-                             */
-                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage)
+                            self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage) //Identify face in Document scanning image
                         }
                         let dict = [KEY_FACE_IMAGE: self.photoImage] as [String : AnyObject]
                         if !self.arrDocumentData.isEmpty{
                             self.arrDocumentData[0] = dict
                         }
-                        // self.arrDocumentData.append(dict)
                         self.tblResult.reloadData()
                     }
                 }
@@ -304,12 +300,7 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.photoImage = UIImage(data: image_photoImage)
                 self.faceRegion = nil;
                 if (self.photoImage != nil){
-                    /*
-                     FaceMatch SDK method call to Identify face in Document scanning image
-                     @Params: BackImage, Front Face Image
-                     @Return: Face data
-                     */
-                    self.faceRegion = EngineWrapper.detectSourceFaces(photoImage)
+                    self.faceRegion = EngineWrapper.detectSourceFaces(photoImage) //Identify face in Document scanning image
                 }
             }
             
@@ -838,7 +829,8 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             if(isConnectedToInternet){
                 let post = PostResult()
-                post.postMethodWithParamsAndImage(parameters: dictParam, forMethod: "https://accurascan.com/sendEmailApi/sendEmail.php", image: arrDocument, faceImg: faceImage == nil ? nil : faceImage , success: { (response) in
+//                https://accurascan.com/sendEmailApi/sendEmail
+                post.postMethodWithParamsAndImage(parameters: dictParam, forMethod: "https://accurascan.com/sendEmailApi/sendEmail", image: arrDocument, faceImg: faceImage == nil ? nil : faceImage , success: { (response) in
                     print(response)
                 }) { (error) in
                     print(error)
@@ -849,10 +841,9 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     /**
-     * This method use find array in filter particular value
-     * Parameters to Pass: filter key
-     *
-     * This method will return filter key value
+     * This method is used to find value by key in array
+     * Param: filter key
+     * Return: value
      */
     func getValue(stKey: String) -> String {
         let arrResult = arrDocumentData.filter( { (details: [String:AnyObject]) -> Bool in
@@ -879,10 +870,9 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     /**
-     * This method use get captured view
-     * Parameters to Pass: UIView
-     *
-     * This method will return array of UIImageview
+     * This method is used to get captured view
+     * Param: UIView
+     * Return: array of UIImageview
      */
     func allImageViewsSubViews(_ view: UIView?) -> [AnyHashable]? {
         var arrImageViews: [AnyHashable] = []
@@ -901,10 +891,9 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     /**
-     * This method use image compress particular size
-     * Parameters to Pass: UIImage and covert size
-     *
-     * This method will return compress UIImage
+     * This method is used to compress image in particular size
+     * Param: UIImage and covert size
+     * Return: compress UIImage
      */
     func compressimage(with image: UIImage?, convertTo size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContext(size)
@@ -1097,7 +1086,8 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             for (index,var dict) in arrDocumentData.enumerated(){
                 for st in dict.keys{
                     if st == KEY_FACE_IMAGE{
-                        dict[KEY_FACE_IMAGE2] = faceMetrics.auditTrail![0] // auditTrail data is userface image
+                         // faceMetrics.auditTrail![0] will return user face image from zoom liveness check for face match
+                        dict[KEY_FACE_IMAGE2] = faceMetrics.auditTrail![0]
                         arrDocumentData[index] = dict
                         isFindImg = true
                         break
@@ -1105,11 +1095,11 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                     if isFindImg{ break }
                 }
             }
-            
+            // faceMetrics.auditTrail![0] will return user face image from zoom liveness check for face match
             faceImage2 = faceMetrics.auditTrail?[0];
             matchImage = faceImage2 ?? UIImage();
             liveImage = faceImage2 ?? UIImage();
-            
+            //Find Facematch score
             if (faceRegion != nil)
             {
                 /*
@@ -1121,12 +1111,13 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 let face2 = EngineWrapper.detectTargetFaces(faceImage2, feature1: faceRegion!.feature)
                 
                 /*
-                 SDK method call to get FaceMatch Score
+                 FaceMatch SDK method call to get FaceMatch Score
                  @Params: FrontImage Face, BackImage Face
                  @Return: Match Score
+                 
                  */
                 let fm_Score = EngineWrapper.identify(faceRegion!.feature, featurebuff2: face2!.feature)
-                let twoDecimalPlaces = String(format: "%.2f", fm_Score*100) //Match score Convert Float Value
+                let twoDecimalPlaces = String(format: "%.2f", fm_Score*100) //Face Match score convert to float value
                 self.removeOldValue("FACEMATCH SCORE : ")
                 let dict = [KEY_VALUE: "\((twoDecimalPlaces))",KEY_TITLE:"FACEMATCH SCORE : "] as [String : AnyObject]
                 if pageType == .ScanPan || pageType == .ScanAadhar{
@@ -1196,24 +1187,26 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.faceRegion = nil;
             if (self.photoImage != nil){
                 /*
-                 FaceMatch SDK method call to Identify face in Document scanning image
-                 @Params: BackImage, Front Face Image
-                 @Return: Face data
+                 Accura Face SDK method to detect user face from document image
+                 Param: Document image
+                 Return: User Face
                  */
+
                 self.faceRegion = EngineWrapper.detectSourceFaces(self.photoImage)
             }
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 if (self.faceRegion != nil){
                     /*
-                     FaceMatch SDK method call to detect Face in back image
-                     @Params: BackImage, Front Face Image faceRegion
-                     @Return: Face Image Frame
+                     Accura Face SDK method to detect user face from selfie or camera stream
+                     Params: User photo, user face found in document scanning
+                     Return: User face from user photo
                      */
-                    let face2 : NSFaceRegion = EngineWrapper.detectTargetFaces(chosenImage, feature1: self.faceRegion?.feature)  
+                    let face2 : NSFaceRegion = EngineWrapper.detectTargetFaces(chosenImage, feature1: self.faceRegion?.feature)   //identify face in back image which found in front image
+                    
                     /*
-                     SDK method call to get FaceMatch Score
-                     @Params: FrontImage Face, BackImage Face
-                     @Return: Match Score
+                     Accura Face SDK method to get face match score
+                     Params: face image from document with user image from selfie or camera stream
+                     Returns: face match score
                      */
                     let fm_Score = EngineWrapper.identify(self.faceRegion!.feature, featurebuff2: face2.feature) 
                     if(fm_Score != 0.0){
@@ -1317,7 +1310,6 @@ class ShowResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource
   
     //MARK:- Custom
     func date(toFormatedDate dateStr: String?) -> String? {
-        //NSString *finalDate = dateStr;
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyMMdd"
         let date: Date? = dateFormatter.date(from: dateStr ?? "")
