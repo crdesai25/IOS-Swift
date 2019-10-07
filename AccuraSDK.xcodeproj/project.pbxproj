@@ -35,7 +35,7 @@
 		18F626A1230E79B8003FD6C2 /* model2.dat in Resources */ = {isa = PBXBuildFile; fileRef = 18F6269F230E79B8003FD6C2 /* model2.dat */; };
 		18F626A2230E79B8003FD6C2 /* model1.dat in Resources */ = {isa = PBXBuildFile; fileRef = 18F626A0230E79B8003FD6C2 /* model1.dat */; };
 		34035BCB21EA074F00069532 /* fdata.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34035BCA21EA074F00069532 /* fdata.xml */; };
-		41048877234B2EAE00D82043 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 41048876234B2EAE00D82043 /* .gitignore */; };
+		41048879234B899B00D82043 /* key.license in Resources */ = {isa = PBXBuildFile; fileRef = 41048878234B899B00D82043 /* key.license */; };
 		5C2D6E9920CA406300031D42 /* AFWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2D6E9220CA406300031D42 /* AFWrapper.swift */; };
 		5C2D6E9A20CA406300031D42 /* CommonErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2D6E9320CA406300031D42 /* CommonErrorAlert.swift */; };
 		5C2D6E9D20CA406300031D42 /* Rechability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2D6E9720CA406300031D42 /* Rechability.swift */; };
@@ -166,7 +166,7 @@
 		18F626A0230E79B8003FD6C2 /* model1.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = model1.dat; path = ../model1.dat; sourceTree = "<group>"; };
 		1B1E5ACBB7521B13715541C2 /* Pods_AccuraSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AccuraSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34035BCA21EA074F00069532 /* fdata.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fdata.xml; sourceTree = "<group>"; };
-		41048876234B2EAE00D82043 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		41048878234B899B00D82043 /* key.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = key.license; sourceTree = "<group>"; };
 		5C2D6E9220CA406300031D42 /* AFWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFWrapper.swift; sourceTree = "<group>"; };
 		5C2D6E9320CA406300031D42 /* CommonErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonErrorAlert.swift; sourceTree = "<group>"; };
 		5C2D6E9720CA406300031D42 /* Rechability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rechability.swift; sourceTree = "<group>"; };
@@ -663,7 +663,7 @@
 		A38570EB2318018500FF7209 /* License */ = {
 			isa = PBXGroup;
 			children = (
-				41048876234B2EAE00D82043 /* .gitignore */,
+				41048878234B899B00D82043 /* key.license */,
 			);
 			path = License;
 			sourceTree = "<group>";
@@ -778,7 +778,6 @@
 				5C94E026211ACA8200428686 /* Aller_Std_It.ttf in Resources */,
 				DC75E60420BF370A0096BC5A /* CodeInfoV.xib in Resources */,
 				0021909122ACE79D00E08B01 /* ListTableCell.xib in Resources */,
-				41048877234B2EAE00D82043 /* .gitignore in Resources */,
 				A382E69B230AA94800C56EAE /* FirstTableViewCell.xib in Resources */,
 				00238B5C22AD680E0031BADB /* DocumentTableCell.xib in Resources */,
 				5C94E02A211ACA8200428686 /* AllerDisplay_Std_Rg.ttf in Resources */,
@@ -789,6 +788,7 @@
 				00238B5822AD67F80031BADB /* UserImgTableCell.xib in Resources */,
 				617EB0D920BB69DD00BCBFD9 /* BarcodeTypeTVC.xib in Resources */,
 				5C67D9A72111E48C00154EB7 /* SVProgressHUD.bundle in Resources */,
+				41048879234B899B00D82043 /* key.license in Resources */,
 				A33ED5C7230EA6EB00005B85 /* ZoomHybrid.pub in Resources */,
 				030BEC0C2269EFCB002450E0 /* cam.png in Resources */,
 				5C67D99F2111E46400154EB7 /* mMQDF_f_Passport_bottom.dic in Resources */,
