@@ -3,4 +3,5 @@ iOS Swift Project to Integrate AccuraScan OCR and AccuraScan Face Match with 3D 
 
 # Download
 Use below command in Terminal to clone repository
+
 git clone https://github.com/accurascan/swift.git
