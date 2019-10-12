@@ -11,4 +11,4 @@ After completing above command install pod with below command
 
 pod install
 
-Once installation is done open Accura Scan.xcworkspace in xcode
+Once installation is done open AccuraSDK.xcworkspace in xcode
