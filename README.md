@@ -3,14 +3,12 @@ iOS Swift Project to Integrate AccuraScan OCR and AccuraScan Face Match with 3D 
 
 # Download
 
-Use below command in Terminal to clone repository
+1. Install git-lfs by using following link -> https://help.github.com/en/github/managing-large-files/installing-git-large-file-storage
 
-install git-lfs
+2. clone repo -> git clone https://github.com/accurascan/IOS-ObjC.git
 
-git clone https://github.com/accurascan/swift.git
+3. Go to project Directory write this command - git lfs fetch --all
 
-After completing above command install pod with below command
+4. pod install
 
-pod install
-
-Once installation is done open AccuraSDK.xcworkspace in xcode
+5. Once installation is done open Accura Scan.xcworkspace in xcode
