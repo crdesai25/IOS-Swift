@@ -9,7 +9,7 @@ target 'AccuraSDK' do
  pod 'IQKeyboardManagerSwift'
  pod 'SwiftyJSON'
  pod 'SVProgressHUD'
- pod 'Alamofire'
+ pod 'Alamofire', '4.9.1'
  pod 'AFNetworking', '~> 3.0'
  pod 'SDWebImage', '~>3.7'
 
